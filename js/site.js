@@ -1,4 +1,4 @@
-/* amirsportdiet.com — shared site behavior */
+/* amirsportdiet.com - shared site behavior */
 
 const LEAD_ENDPOINT = 'https://us-central1-wellnessprojectar.cloudfunctions.net/submitLead';
 const WA_PHONE = '972524844497';
@@ -40,7 +40,7 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-/* Count-up stats ([data-count]) — animate once when scrolled into view */
+/* Count-up stats ([data-count]) - animate once when scrolled into view */
 const countObserver = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
         if (!e.isIntersecting) return;
@@ -58,7 +58,7 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
 
-/* Body-composition bars ([data-w]) — fill when visible */
+/* Body-composition bars ([data-w]) - fill when visible */
 const barObserver = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
         if (!e.isIntersecting) return;
@@ -101,7 +101,7 @@ if (leadForm) {
                     name: data.name,
                     phone: data.phone,
                     notes: (data.message || '') + (interest ? `\n[מתעניין/ת ב: ${interest}]` : ''),
-                    source: interest ? `אתר — ${interest}` : 'אתר',
+                    source: interest ? `אתר - ${interest}` : 'אתר',
                     website: data.website || '', // honeypot
                 }),
             });
