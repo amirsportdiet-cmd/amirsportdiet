@@ -62,32 +62,33 @@
 <!-- ===== POSTS ===== -->
 <section class="section">
     <div class="container">
-        <div class="grid grid-3">
-            <a class="card post-card reveal" href="glp1-muscle.html">
-                <div class="thumb">💪</div>
+        <div class="grid grid-3" id="posts-grid"></div>
+        <script src="posts.js"></script>
+        <script>
+        /* render post cards from POSTS (defined in posts.js) */
+        document.querySelector('#posts-grid').innerHTML = POSTS.map((p) => {
+            const fmtDate = p.date ? p.date.split('-').reverse().join('.') : '';
+            if (p.comingSoon) {
+                return `<div class="card post-card" style="opacity:0.65">
+                    <div class="thumb">${p.emoji || '📝'}</div>
+                    <div class="body">
+                        <div class="meta">בקרוב${p.tag ? ' · ' + p.tag : ''}</div>
+                        <h3>${p.title}</h3>
+                        <div class="more" style="color:var(--muted)">בקרוב...</div>
+                    </div>
+                </div>`;
+            }
+            const href = p.href || `post.html?p=${p.slug}`;
+            return `<a class="card post-card" href="${href}">
+                <div class="thumb">${p.emoji || '📝'}</div>
                 <div class="body">
-                    <div class="meta">GLP-1 · הרכב גוף</div>
-                    <h3>אוזמפיק מוריד במשקל — אבל ממה בדיוק? המדריך לשמירה על שריר בזמן טיפול ב-GLP-1</h3>
+                    <div class="meta">${[p.tag, fmtDate].filter(Boolean).join(' · ')}</div>
+                    <h3>${p.title}</h3>
                     <div class="more">לקריאת המאמר ←</div>
                 </div>
-            </a>
-            <div class="card post-card reveal d1" style="opacity:0.65">
-                <div class="thumb">🥚</div>
-                <div class="body">
-                    <div class="meta">בקרוב</div>
-                    <h3>כמה חלבון באמת צריך — ומתי לאכול אותו?</h3>
-                    <div class="more" style="color:var(--muted)">בקרוב...</div>
-                </div>
-            </div>
-            <div class="card post-card reveal d2" style="opacity:0.65">
-                <div class="thumb">⚖️</div>
-                <div class="body">
-                    <div class="meta">בקרוב</div>
-                    <h3>למה המשקל קופץ מיום ליום — ומה באמת שווה למדוד</h3>
-                    <div class="more" style="color:var(--muted)">בקרוב...</div>
-                </div>
-            </div>
-        </div>
+            </a>`;
+        }).join('');
+        </script>
     </div>
 </section>
 
