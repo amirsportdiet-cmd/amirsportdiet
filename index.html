@@ -357,9 +357,32 @@
             <h2>עוקבים? בואו נכיר באינסטגרם</h2>
             <p>טיפים, תכנים מהקליניקה ומהמחקר, וקצת מהחיים - @amir_rubin_</p>
         </div>
-        <!-- Elfsight Instagram Feed -->
-        <script src="https://elfsightcdn.com/platform.js" async></script>
-        <div class="elfsight-app-42102be3-aad0-4849-939a-71ec1b3a8853" data-elfsight-app-lazy></div>
+        <!-- self-hosted feed (Cloud Function); falls back to Elfsight until the token is configured -->
+        <div id="ig-feed" class="ig-grid reveal" aria-label="פוסטים אחרונים מאינסטגרם"></div>
+        <script>
+        (async () => {
+            const box = document.querySelector('#ig-feed');
+            const elfsight = () => {
+                box.outerHTML = '<div class="elfsight-app-42102be3-aad0-4849-939a-71ec1b3a8853" data-elfsight-app-lazy></div>';
+                const sc = document.createElement('script');
+                sc.src = 'https://elfsightcdn.com/platform.js'; sc.async = true;
+                document.body.appendChild(sc);
+            };
+            try {
+                const r = await fetch('https://us-central1-wellnessprojectar.cloudfunctions.net/instagramFeed');
+                if (!r.ok) throw new Error();
+                const { posts } = await r.json();
+                if (!posts || !posts.length) throw new Error();
+                box.innerHTML = posts.map((p) => `
+                    <a href="${p.link}" target="_blank" rel="noopener">
+                        <img src="${p.image}" alt="${(p.caption || 'פוסט מאינסטגרם').replace(/"/g, '')}" loading="lazy">
+                        ${p.isVideo ? '<span class="vid-badge">▶</span>' : ''}
+                        ${p.caption ? `<span class="ig-cap">${p.caption.replace(/</g, '&lt;')}</span>` : ''}
+                    </a>`).join('');
+                box.classList.add('visible');
+            } catch { elfsight(); }
+        })();
+        </script>
         <p style="text-align:center; margin-top:22px">
             <a class="btn btn-ig" href="https://www.instagram.com/amir_rubin_/" target="_blank" rel="noopener">לעקוב באינסטגרם ←</a>
         </p>
