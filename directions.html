@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#062019">
+    <title>הוראות הגעה לקליניקה - אמיר רובין</title>
+    <meta name="description" content="הוראות הגעה לקליניקה של אמיר רובין באשקלון - ניווט, חניה ותחבורה ציבורית.">
+    <!-- hidden page: not indexed, not in the site menu -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://amirsportdiet.com/directions.html">
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+
+    <style>
+        .dir-wrap { max-width: 720px; margin: 0 auto; padding: 0 18px 60px; }
+        .dir-hero { text-align: center; padding: 34px 0 22px; }
+        .dir-hero .logo-mark { width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 14px; display: grid; place-items: center; background: #fff; box-shadow: var(--shadow-md); overflow: hidden; }
+        .dir-hero .logo-mark img { width: 100%; height: 100%; object-fit: cover; }
+        .dir-hero h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 900; color: var(--ink); line-height: 1.25; }
+        .dir-address { margin-top: 10px; font-size: 17px; color: var(--muted); font-weight: 500; }
+        .dir-address b { color: var(--ink); }
+
+        .nav-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 22px 0; }
+        .nav-btns a { display: flex; align-items: center; justify-content: center; gap: 9px; font-weight: 800; font-size: 16px; padding: 15px 12px; border-radius: 14px; text-decoration: none; box-shadow: var(--shadow-sm); transition: transform .15s, box-shadow .15s; }
+        .nav-btns a:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .nav-btns svg { width: 22px; height: 22px; flex: none; }
+        .btn-waze { background: #33ccff; color: #06303d; }
+        .btn-gmap { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+
+        .map-embed { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line); margin-bottom: 30px; }
+        .map-embed iframe { display: block; width: 100%; height: 300px; border: 0; }
+
+        .dir-section-title { font-size: 13px; font-weight: 800; letter-spacing: .04em; color: var(--emerald); text-transform: uppercase; margin: 30px 0 14px; }
+
+        .step { display: flex; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); margin-bottom: 14px; }
+        .step .num { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--emerald); color: #fff; font-weight: 900; display: grid; place-items: center; font-size: 16px; }
+        .step .step-body { flex: 1; min-width: 0; }
+        .step h3 { font-size: 17px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+        .step p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+        .step figure { margin: 12px 0 0; }
+        .step figure img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--line); display: block; }
+        .step figure figcaption { font-size: 12.5px; color: var(--muted); margin-top: 6px; text-align: center; }
+
+        .park-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); margin-bottom: 14px; }
+        .park-card h3 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .park-card .free-badge { font-size: 11.5px; font-weight: 800; color: var(--emerald); background: rgba(16,185,129,.1); border-radius: 999px; padding: 3px 9px; }
+        .park-card p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+        .park-card figure { margin: 12px 0 0; }
+        .park-card figure img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--line); display: block; }
+
+        .transit { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm); }
+        .transit ul { margin: 10px 0 0; padding: 0; list-style: none; }
+        .transit li { font-size: 15px; color: var(--ink); padding: 7px 0; border-bottom: 1px dashed var(--line); display: flex; gap: 8px; }
+        .transit li:last-child { border-bottom: 0; }
+        .transit li b { color: var(--ink); }
+        .transit li span { color: var(--muted); }
+        .transit .lines { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+        .transit .lines span { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px; font-weight: 800; color: var(--ink); font-size: 14px; }
+        .transit-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+        .transit-cta a { flex: 1; text-align: center; min-width: 140px; font-weight: 800; font-size: 14.5px; padding: 12px; border-radius: 12px; text-decoration: none; box-shadow: var(--shadow-sm); }
+        .transit-cta .t-g { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+        .transit-cta .t-m { background: #ff6f00; color: #fff; }
+
+        .help-box { text-align: center; margin-top: 34px; padding: 24px; background: var(--ink); border-radius: var(--radius); color: #eafff6; }
+        .help-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; color: #fff; }
+        .help-box p { font-size: 14.5px; opacity: .85; margin-bottom: 16px; }
+        .help-box .help-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .help-box .help-btns a { font-weight: 800; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-size: 15px; }
+        .help-box .h-wa { background: #25d366; color: #053d21; }
+        .help-box .h-call { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+
+        .back-home { text-align: center; margin-top: 24px; }
+        .back-home a { color: var(--muted); font-size: 14px; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<div class="dir-wrap">
+
+    <!-- HERO -->
+    <div class="dir-hero">
+        <a href="index.html" class="logo-mark"><img src="images/logo.png" alt="אמיר רובין"></a>
+        <h1>הוראות הגעה לקליניקה</h1>
+        <p class="dir-address"><b>אורט 23א׳, אשקלון</b> · קומה 5, דירה 18</p>
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <div class="nav-btns">
+        <a class="btn-waze" href="https://waze.com/ul/hsv8s4texu" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 2 3 5.9 3 10.6c0 1.5.4 2.9 1.1 4.1-.2.8-.7 1.7-1.5 2.3-.3.2-.4.6-.3 1 .1.3.4.6.8.6 1.9 0 3.3-.6 4.2-1.2 1.1.4 2.3.6 3.7.6 5 0 9-3.9 9-8.6S17 2 12 2zm-3 9.1a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm6 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
+            ניווט ב-Waze
+        </a>
+        <a class="btn-gmap" href="https://www.google.com/maps/search/?api=1&query=%D7%90%D7%9E%D7%99%D7%A8%20%D7%A8%D7%95%D7%91%D7%99%D7%9F%20%D7%93%D7%99%D7%90%D7%98%D7%9F%20%D7%A7%D7%9C%D7%99%D7%A0%D7%99%20%D7%95%D7%A1%D7%A4%D7%95%D7%A8%D7%98%20%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Google Maps
+        </a>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-embed">
+        <iframe title="מפת הגעה לקליניקה" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=%D7%90%D7%95%D7%A8%D7%98%2023%20%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F&z=16&output=embed"></iframe>
+    </div>
+
+    <!-- STEPS -->
+    <div class="dir-section-title">הדרך אליי — שלב אחר שלב</div>
+
+    <div class="step">
+        <div class="num">1</div>
+        <div class="step-body">
+            <h3>חניה ברחוב "שביל הלימון"</h3>
+            <p>שביל הלימון הוא רחוב פנימי בתוך רחוב אורט באשקלון. הקליניקה נמצאת ב<b>בניין הראשון בכניסה לשביל הלימון, מצד ימין</b>.</p>
+            <figure><img src="images/directions/sign.jpg" alt="שלט הרחוב שביל הלימון והבניין" onerror="this.closest('figure').style.display='none'">
+                <figcaption>שלט "שביל הלימון" — הבניין הראשון מימין</figcaption></figure>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="num">2</div>
+        <div class="step-body">
+            <h3>כניסה לבניין (אורט 23א׳)</h3>
+            <p>היכנסו לדלת הכניסה של הבניין — <b>הדלת פתוחה</b>.</p>
+            <figure><img src="images/directions/entrance.jpg" alt="כניסת הבניין" onerror="this.closest('figure').style.display='none'">
+                <figcaption>כניסת הבניין</figcaption></figure>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="num">3</div>
+        <div class="step-body">
+            <h3>קומה 5, דירה 18</h3>
+            <p>עלו לקומה 5 — הקליניקה היא <b>דירה 18</b>.</p>
+            <figure><img src="images/directions/door.jpg" alt="דלת הקליניקה דירה 18" onerror="this.closest('figure').style.display='none'">
+                <figcaption>דלת הקליניקה — דירה 18</figcaption></figure>
+        </div>
+    </div>
+
+    <!-- PARKING -->
+    <div class="dir-section-title">חניות נוספות — ללא תשלום</div>
+
+    <div class="park-card">
+        <h3>חניה 1 <span class="free-badge">ללא תשלום</span></h3>
+        <p>חנו בחניה ולאחר מכן המשיכו ללכת רגלית <b>בכיוון החץ</b> שבתמונה, עד לכניסה לשביל הלימון.</p>
+        <figure><img src="images/directions/parking-1.jpg" alt="חניה 1 וכיוון ההליכה" onerror="this.closest('figure').style.display='none'"></figure>
+    </div>
+
+    <div class="park-card">
+        <h3>חניה 2 — מול מועדון "כוס ספייס" <span class="free-badge">ללא תשלום</span></h3>
+        <p>חנו בחניה של מועדון "כוס ספייס" והמשיכו ללכת <b>בכיוון החץ</b> שבתמונה לכיוון הבניין.</p>
+        <figure><img src="images/directions/parking-2.jpg" alt="חניה 2 - כוס ספייס וכיוון ההליכה" onerror="this.closest('figure').style.display='none'"></figure>
+    </div>
+
+    <!-- PUBLIC TRANSPORT -->
+    <div class="dir-section-title">הגעה בתחבורה ציבורית</div>
+
+    <div class="transit">
+        <ul>
+            <li><b>תחנות קרובות:</b><span>אורט/בצלאל ואורט/פינס — כ-3 דקות הליכה לקליניקה</span></li>
+            <li><b>נחיתה:</b><span>בבית הספר "אורט אפרידר" שברחוב אורט, ומשם הליכה קצרה לשביל הלימון</span></li>
+        </ul>
+        <div style="margin-top:12px">
+            <span style="font-size:13.5px;color:var(--muted);font-weight:700">קווים שמגיעים לאזור:</span>
+            <div class="lines"><span>5</span><span>14</span><span>150</span><span>301</span><span>96</span><span>91</span></div>
+        </div>
+        <div class="transit-cta">
+            <a class="t-g" href="https://www.google.com/maps/dir/?api=1&destination=%D7%90%D7%95%D7%A8%D7%98%2023%20%D7%90%D7%A9%D7%A7%D7%9C%D7%95%D7%9F&travelmode=transit" target="_blank" rel="noopener">תכנון נסיעה (Google)</a>
+            <a class="t-m" href="https://moovitapp.com/index/he/%D7%AA%D7%97%D7%91%D7%95%D7%A8%D7%94_%D7%A6%D7%99%D7%91%D7%95%D7%A8%D7%99%D7%AA-%D7%91%D7%99%D7%AA_%D7%A1%D7%A4%D7%A8_%D7%90%D7%95%D7%A8%D7%98-Israel-stop_7686-1" target="_blank" rel="noopener">פתיחה ב-Moovit</a>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px">הזמנים והקווים המדויקים משתנים — מומלץ לבדוק נסיעה בזמן אמת ב-Google Maps או Moovit.</p>
+    </div>
+
+    <!-- HELP -->
+    <div class="help-box">
+        <h3>הלכתם לאיבוד? 🙂</h3>
+        <p>אני כאן — שלחו לי הודעה או התקשרו ואכוון אתכם.</p>
+        <div class="help-btns">
+            <a class="h-wa" href="https://wa.me/972524844497?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9E%D7%99%D7%A8%2C%20%D7%90%D7%A0%D7%99%20%D7%91%D7%93%D7%A8%D7%9A%20%D7%90%D7%9C%D7%99%D7%9A%20%D7%95%D7%A6%D7%A8%D7%99%D7%9A%20%D7%A2%D7%96%D7%A8%D7%94%20%D7%91%D7%94%D7%92%D7%A2%D7%94" target="_blank" rel="noopener">וואטסאפ</a>
+            <a class="h-call" href="tel:+972524844497">חיוג: 052-484-4497</a>
+        </div>
+    </div>
+
+    <div class="back-home"><a href="index.html">← חזרה לאתר</a></div>
+
+</div>
+
+</body>
+</html>
