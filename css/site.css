@@ -674,3 +674,5 @@ a.ts-mark:hover { color: var(--ink); opacity: 1; }
     .post-body .refs li, .faq-item .a, .gl-item p { color: var(--body-c); }
     img { filter: brightness(0.94); }
 }
+
+.ts-google { color: #f4b400; opacity: 1; }
