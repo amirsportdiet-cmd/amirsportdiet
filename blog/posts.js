@@ -84,6 +84,7 @@ const POSTS = [
     },
     {
         slug: 'nutrition-training-60plus',
+        image: 'images/nutrition-training-60plus.jpg',
         cat: 'בריאות',
         title: 'תזונה ואימון בגיל השלישי: המדריך לשמירה על שריר, עצם ועצמאות',
         description: 'אחרי גיל 60 ההמלצה הרגילה לחלבון כבר לא מספיקה. כמה באמת צריך, למה אימון התנגדות הוא חובה, ואיך נראה שבוע נכון.',
@@ -123,6 +124,7 @@ const POSTS = [
     },
     {
         slug: 'glp1-muscle',
+        image: 'images/glp1-muscle.jpg',
         cat: 'ירידה במשקל',
         href: 'glp1-muscle.html',
         title: 'אוזמפיק מוריד במשקל - אבל ממה בדיוק? המדריך לשמירה על שריר בזמן טיפול ב-GLP-1',
@@ -133,6 +135,7 @@ const POSTS = [
     },
     {
         slug: 'anabolic-steroids',
+        image: 'images/anabolic-steroids.jpg',
         cat: 'בריאות',
         title: 'סטרואידים אנאבוליים: למה הם עובדים - ולמה לא להתקרב',
         description: 'מה עושים סטרואידים אנאבוליים לגוף, מה הראו מחקרי הטסטוסטרון המפורסמים, ולמה המחיר הבריאותי - עד פי 4.6 בסיכון למוות - לא שווה את זה.',
@@ -242,6 +245,7 @@ const POSTS = [
     },
     {
         slug: 'coq10',
+        image: 'images/coq10.jpg',
         cat: 'תוספים',
         title: 'קו-אנזים Q10: תוסף מומלץ או מושמץ?',
         description: 'הגוף מייצר אותו בעצמו, ההשפעות שנמדדו צנועות - אז למי בכלל כדאי לשקול תיסוף של Q10? מה שהמדע יודע היום.',
@@ -251,6 +255,7 @@ const POSTS = [
     },
     {
         slug: 'cross-education',
+        image: 'images/cross-education.jpg',
         cat: 'אימון',
         title: 'פציעה בגפה אחת? אמנו את השנייה - הקסם של Cross Education',
         description: 'אימון של היד או הרגל הבריאה מחזק גם את הצד הפצוע ומאט אובדן שריר - כך עובדת תופעת ה-Cross Education.',
@@ -710,6 +715,7 @@ const POSTS = [
     },
     {
         slug: 'restaurant-tips',
+        image: 'images/restaurant-tips.jpg',
         cat: 'טיפים',
         title: '5 טיפים לאכול בריא במסעדה בלי לוותר על ההנאה',
         description: 'סלט לפני, בישול נקי, רטבים בצד - חמישה כללים פשוטים שישמרו על הדיאטה גם כשיוצאים לאכול בחוץ.',
@@ -799,6 +805,7 @@ const POSTS = [
     },
     {
         slug: 'stay-at-home-nutrition',
+        image: 'images/stay-at-home-nutrition.jpg',
         cat: 'טיפים',
         title: 'תזונה בתקופות של שהייה ממושכת בבית',
         description: 'בידוד, עבודה מהבית או חופשה ארוכה - איך הופכים את הבית מיתרון תזונתי במקום מלכודת נשנושים, ומה עם תוספים.',
