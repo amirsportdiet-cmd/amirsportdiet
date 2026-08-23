@@ -482,3 +482,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .nav-links li { width: 100%; }
     .nav-links a { display: block; padding: 12px 4px; font-size: 17px; }
 }
+
+/* ===== results-by-goal section ===== */
+.result-card { text-align: center; }
+.result-card .rc-icon { font-size: 30px; margin-bottom: 8px; }
+.result-card h3 { font-size: 16.5px; margin-bottom: 10px; }
+.result-card .rc-num {
+    font-size: 40px; font-weight: 900; color: var(--green-d, #14805e);
+    line-height: 1.1; margin-bottom: 10px; font-variant-numeric: tabular-nums;
+}
+.result-card .rc-num small { font-size: 16px; font-weight: 700; color: var(--muted); }
+.result-card p { font-size: 14.5px; color: var(--muted); }
+.results-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 22px; }
+.quote-card .who .avatar { font-size: 20px; line-height: 1; }
+
+.form-status .wa-after { display: inline-block; margin-inline-start: 8px; font-weight: 700; color: #128c4b; text-decoration: underline; }

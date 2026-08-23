@@ -143,7 +143,9 @@ if (leadForm) {
             });
             if (!res.ok) throw new Error('bad status');
             leadForm.reset();
-            status.textContent = '✓ הפרטים התקבלו! אחזור אליך בהקדם';
+            status.innerHTML = '✓ הפרטים התקבלו! אחזור אליך בהקדם 🙂 '
+                + '<a class="wa-after" target="_blank" rel="noopener" href="https://wa.me/' + WA_PHONE
+                + '?text=' + encodeURIComponent('היי אמיר, השארתי עכשיו פרטים באתר 🙂') + '">או תכתבו לי עכשיו בוואטסאפ ←</a>';
             status.className = 'form-status ok';
         } catch (err) {
             status.textContent = 'משהו השתבש... אפשר פשוט לשלוח לי וואטסאפ 🙂';
