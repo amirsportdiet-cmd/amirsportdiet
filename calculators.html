@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#062019">
+    <title>מחשבונים תזונתיים - אמיר רובין | קלוריות, חלבון ו-BMI</title>
+    <meta name="description" content="מחשבונים תזונתיים פשוטים בעברית: כמה קלוריות הגוף שלך שורף ביום, כמה חלבון אתה צריך לפי המטרה שלך, ומה ה-BMI שלך - עם הסבר ברור לכל תוצאה.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="מחשבונים תזונתיים - אמיר רובין">
+    <meta property="og:description" content="כמה קלוריות אתה שורף ביום? כמה חלבון אתה צריך? כלים פשוטים עם הסברים ברורים.">
+    <meta property="og:url" content="https://amirsportdiet.com/calculators.html">
+    <meta property="og:image" content="https://amirsportdiet.com/images/og.png">
+    <meta property="og:locale" content="he_IL">
+    <link rel="canonical" href="https://amirsportdiet.com/calculators.html">
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+
+    <style>
+        /* ===== calculators ===== */
+        .calc-card { max-width: 720px; margin: 0 auto 28px; }
+        .calc-card h3 { font-size: 20px; margin-bottom: 4px; }
+        .calc-sub { font-size: 14.5px; color: var(--muted); margin-bottom: 18px; }
+        .calc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 16px; }
+        .calc-form label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
+        .calc-form input, .calc-form select {
+            width: 100%; padding: 11px 12px; border: 1.5px solid rgba(0,0,0,0.14);
+            border-radius: 10px; font: inherit; font-size: 15px; background: #fff;
+        }
+        .calc-form input:focus, .calc-form select:focus { outline: 2px solid #14805e; border-color: transparent; }
+        .seg { display: flex; border: 1.5px solid rgba(0,0,0,0.14); border-radius: 10px; overflow: hidden; }
+        .seg button { flex: 1; padding: 11px 6px; border: 0; background: #fff; font: inherit; font-size: 14px; cursor: pointer; }
+        .seg button.on { background: #0e5c44; color: #fff; font-weight: 700; }
+        .calc-result { display: none; background: #f0faf5; border: 1.5px solid #bfe8d5; border-radius: 14px; padding: 18px 20px; margin-top: 6px; }
+        .calc-result.show { display: block; }
+        .calc-result .big { font-size: 34px; font-weight: 900; color: #0e5c44; line-height: 1.15; font-variant-numeric: tabular-nums; }
+        .calc-result .big small { font-size: 15px; font-weight: 700; color: var(--muted); }
+        .calc-result p { font-size: 14.5px; margin-top: 8px; color: var(--body-c, #333); }
+        .calc-result .rows { display: grid; gap: 6px; margin-top: 10px; }
+        .calc-result .row { display: flex; justify-content: space-between; font-size: 14.5px; background: #fff; border-radius: 8px; padding: 8px 12px; }
+        .calc-result .row b { font-variant-numeric: tabular-nums; }
+        .calc-note { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+        .calc-cta { text-align: center; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar scrolled">
+    <div class="navbar-inner">
+        <a href="index.html" class="nav-logo">
+            <span class="logo-dot"><img src="images/logo.png" alt="לוגו אמיר רובין"></span>
+            <span>אמיר רובין<small>תזונה · ספורט · מדע</small></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">בית</a></li>
+            <li><a href="nutrition.html">ליווי תזונתי</a></li>
+            <li><a href="https://www.wellnessproject.co.il/landingpage" target="_blank" rel="noopener">פרויקט גזרה</a></li>
+            <li><a href="about.html">אודות</a></li>
+            <li><a href="blog/">בלוג</a></li>
+            <li><a href="calculators.html" class="active">מחשבונים</a></li>
+            <li><a href="https://primestudy.co.il" target="_blank" rel="noopener">מחקר PRIME</a></li>
+            <li><a href="contact.html">צור קשר</a></li>
+            <li><a href="https://amir-dashboard-temp.vercel.app/nt" target="_blank" rel="noopener">כניסת מלווים</a></li>
+        </ul>
+        <div class="nav-cta">
+            <a class="btn btn-wa btn-sm" data-wa="היי אמיר, השתמשתי במחשבונים באתר ואשמח לשמוע על ליווי">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1l.7-.9c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.3z"/></svg>
+                שיחה בוואטסאפ
+            </a>
+        </div>
+        <button class="mobile-toggle" aria-label="תפריט"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<header class="hero-dark page-hero">
+    <div class="container">
+        <span class="badge"><span class="dot"></span> כלים חינמיים</span>
+        <h1>מחשבונים <span class="grad-text">תזונתיים</span></h1>
+        <p class="lead">
+            שלושה כלים פשוטים שיעשו לך סדר: כמה קלוריות הגוף שלך שורף,
+            כמה חלבון אתה באמת צריך, ואיפה אתה עומד. בלי ז'רגון - עם הסבר ברור לכל מספר.
+        </p>
+    </div>
+</header>
+
+<!-- ===== מחשבון קלוריות ===== -->
+<section class="section">
+    <div class="container">
+        <div class="card calc-card reveal" id="tdee">
+            <h3>🔥 כמה קלוריות אני שורף ביום?</h3>
+            <p class="calc-sub">ממלאים 4 פרטים - ומקבלים כמה הגוף שורף ביום, וכמה כדאי לאכול לפי המטרה.</p>
+            <div class="calc-form">
+                <div>
+                    <label>מין</label>
+                    <div class="seg" id="t-sex">
+                        <button type="button" class="on" data-v="m">גבר</button>
+                        <button type="button" data-v="f">אישה</button>
+                    </div>
+                </div>
+                <div><label for="t-age">גיל</label><input id="t-age" type="number" inputmode="numeric" min="14" max="99" placeholder="למשל 35"></div>
+                <div><label for="t-h">גובה בס"מ</label><input id="t-h" type="number" inputmode="numeric" min="120" max="230" placeholder="למשל 172"></div>
+                <div><label for="t-w">משקל בק"ג</label><input id="t-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="למשל 80"></div>
+                <div style="grid-column:1/-1">
+                    <label for="t-act">כמה אתה זז ביומיום?</label>
+                    <select id="t-act">
+                        <option value="1.2">כמעט לא זז - עבודה בישיבה, בלי אימונים</option>
+                        <option value="1.375" selected>זז קצת - הליכות או 1-2 אימונים קלים בשבוע</option>
+                        <option value="1.55">פעיל - 3-4 אימונים בשבוע</option>
+                        <option value="1.725">פעיל מאוד - 5-6 אימונים בשבוע</option>
+                        <option value="1.9">ספורטאי / עבודה פיזית קשה + אימונים</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="t-go">חשב לי</button>
+            <div class="calc-result" id="t-res"></div>
+            <p class="calc-note">החישוב לפי נוסחת Mifflin-St Jeor - הנוסחה המקובלת במחקר. זו הערכה טובה, אבל כל גוף קצת שונה.</p>
+        </div>
+
+        <!-- ===== מחשבון חלבון ===== -->
+        <div class="card calc-card reveal" id="protein">
+            <h3>🥚 כמה חלבון אני צריך ביום?</h3>
+            <p class="calc-sub">כמות החלבון תלויה במשקל ובמטרה - לא צריך יותר מזה כדי לחשב.</p>
+            <div class="calc-form">
+                <div><label for="p-w">משקל בק"ג</label><input id="p-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="למשל 80"></div>
+                <div>
+                    <label for="p-goal">מה המטרה שלך?</label>
+                    <select id="p-goal">
+                        <option value="cut">לרדת במשקל / להתחטב</option>
+                        <option value="mass">לעלות במסת שריר</option>
+                        <option value="fit">להיות בריא ולשמור על הקיים</option>
+                        <option value="senior">אני מעל גיל 60</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="p-go">חשב לי</button>
+            <div class="calc-result" id="p-res"></div>
+            <p class="calc-note">לפי המחקרים העדכניים: 1.8-2.7 גר'/ק"ג בחיטוב, 1.4-2.6 בעלייה במסה, 1.2-1.8 לשמירה, ומעל גיל 60 - לפחות 1.0-1.2. שווה לקרוא על זה עוד <a href="blog/post.html?p=nutrition-training-60plus">בבלוג</a>.</p>
+        </div>
+
+        <!-- ===== BMI ===== -->
+        <div class="card calc-card reveal" id="bmi">
+            <h3>⚖️ מה ה-BMI שלי?</h3>
+            <p class="calc-sub">מדד מסת הגוף - נקודת פתיחה מקובלת, אבל חשוב להבין גם את המגבלה שלו.</p>
+            <div class="calc-form">
+                <div><label for="b-h">גובה בס"מ</label><input id="b-h" type="number" inputmode="numeric" min="120" max="230" placeholder="למשל 172"></div>
+                <div><label for="b-w">משקל בק"ג</label><input id="b-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="למשל 80"></div>
+            </div>
+            <button class="btn btn-primary" id="b-go">חשב לי</button>
+            <div class="calc-result" id="b-res"></div>
+            <p class="calc-note">חשוב לדעת: BMI לא מבדיל בין שריר לשומן - מתאמן שרירי יכול לקבל "עודף משקל" בטעות. בקליניקה אנחנו מודדים הרכב גוף אמיתי במכשיר InBody.</p>
+        </div>
+
+        <div class="calc-cta reveal">
+            <p style="margin-bottom:12px;font-size:15.5px">רוצה שמישהו יעשה לך סדר במספרים האלה - ויבנה מהם תוכנית אמיתית?</p>
+            <a class="btn btn-primary btn-lg" href="contact.html">לשיחת היכרות חינם ←</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>אמיר רובין</h4>
+                <p class="brand-line">
+                    דיאטן קליני וספורט, מרצה בתואר ראשון במדעי התזונה, דוקטורנט וחוקר קליני.
+                    ליווי תזונתי מבוסס מדע - מותאם לחיים האמיתיים.
+                </p>
+            </div>
+            <div>
+                <h4>ניווט</h4>
+                <ul>
+                    <li><a href="index.html">בית</a></li>
+                    <li><a href="nutrition.html">ליווי תזונתי אישי</a></li>
+                    <li><a href="about.html">אודות</a></li>
+                    <li><a href="blog/">בלוג</a></li>
+                    <li><a href="calculators.html">מחשבונים</a></li>
+                    <li><a href="contact.html">צור קשר</a></li>
+                    <li><a href="https://amir-dashboard-temp.vercel.app/nt" target="_blank" rel="noopener">כניסת מלווים</a></li>
+                    <li><a href="accessibility.html">הצהרת נגישות</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>עוד</h4>
+                <ul>
+                    <li><a href="https://primestudy.co.il" target="_blank" rel="noopener">מחקר PRIME</a></li>
+                    <li><a href="https://www.wellnessproject.co.il/landingpage" target="_blank" rel="noopener">פרויקט גזרה</a></li>
+                    <li><a href="https://www.instagram.com/amir_rubin_/" target="_blank" rel="noopener">אינסטגרם</a></li>
+                    <li><a data-wa="היי אמיר, אשמח לשמוע פרטים">וואטסאפ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">© <span id="year"></span> אמיר רובין · amirsportdiet.com</div>
+    </div>
+</footer>
+
+<script src="js/site.js"></script>
+<script>
+(() => {
+    'use strict';
+    const $ = (id) => document.getElementById(id);
+    const num = (id) => { const v = parseFloat($(id).value); return isFinite(v) ? v : null; };
+    const fmt = (n) => Math.round(n).toLocaleString('he-IL');
+
+    /* ---- sync weight between calculators: fill once, works everywhere ---- */
+    ['t-w', 'p-w', 'b-w'].forEach((id) => $(id).addEventListener('input', () => {
+        ['t-w', 'p-w', 'b-w'].forEach((o) => { if (o !== id && !$(o).matches(':focus')) $(o).value = $(id).value; });
+    }));
+    ['t-h', 'b-h'].forEach((id) => $(id).addEventListener('input', () => {
+        const o = id === 't-h' ? 'b-h' : 't-h';
+        if (!$(o).matches(':focus')) $(o).value = $(id).value;
+    }));
+
+    /* ---- sex segmented control ---- */
+    let sex = 'm';
+    $('t-sex').addEventListener('click', (e) => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        sex = b.dataset.v;
+        $('t-sex').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+    });
+
+    /* ---- calories (Mifflin-St Jeor) ---- */
+    $('t-go').addEventListener('click', () => {
+        const age = num('t-age'), h = num('t-h'), w = num('t-w'), act = parseFloat($('t-act').value);
+        const res = $('t-res');
+        if (!age || !h || !w) { res.innerHTML = '<p>חסרים כמה פרטים למעלה 🙂</p>'; res.classList.add('show'); return; }
+        const bmr = 10 * w + 6.25 * h - 5 * age + (sex === 'm' ? 5 : -161);
+        const tdee = bmr * act;
+        res.innerHTML =
+            '<div class="big">' + fmt(tdee) + ' <small>קלוריות ביום</small></div>' +
+            '<p>זו בערך הכמות שהגוף שלך שורף ביממה שלמה, כולל הפעילות. מזה נגזר כמה כדאי לאכול:</p>' +
+            '<div class="rows">' +
+            '<div class="row"><span>📉 כדי לרדת במשקל בקצב בריא</span><b>' + fmt(tdee - 500) + '-' + fmt(tdee - 300) + '</b></div>' +
+            '<div class="row"><span>⚖️ כדי לשמור על המשקל</span><b>' + fmt(tdee) + '</b></div>' +
+            '<div class="row"><span>💪 כדי לעלות במסה (בשילוב אימוני כוח)</span><b>' + fmt(tdee + 200) + '-' + fmt(tdee + 400) + '</b></div>' +
+            '</div>' +
+            '<p style="margin-top:10px">בלי אף פעילות, רק לקיום הגוף (BMR): כ-' + fmt(bmr) + ' קלוריות.</p>';
+        res.classList.add('show');
+    });
+
+    /* ---- protein ---- */
+    const P_RANGES = {
+        cut:    { lo: 1.8, hi: 2.7, why: 'בזמן ירידה במשקל צריך יותר חלבון - כדי שהירידה תגיע משומן ולא משריר.' },
+        mass:   { lo: 1.4, hi: 2.6, why: 'לבניית שריר, יחד עם אימוני התנגדות. יותר מזה - כבר לא תורם.' },
+        fit:    { lo: 1.2, hi: 1.8, why: 'לשמירה על מסת השריר והבריאות ביומיום.' },
+        senior: { lo: 1.2, hi: 1.6, why: 'מעל גיל 60 הגוף זקוק ליותר חלבון כדי למנוע אובדן שריר (סרקופניה). ההמלצה הרשמית הישנה של 0.8 - כבר לא מספיקה.' },
+    };
+    $('p-go').addEventListener('click', () => {
+        const w = num('p-w'), r = P_RANGES[$('p-goal').value], res = $('p-res');
+        if (!w) { res.innerHTML = '<p>חסר המשקל 🙂</p>'; res.classList.add('show'); return; }
+        const lo = Math.round(w * r.lo), hi = Math.round(w * r.hi);
+        const meals = Math.round((lo + hi) / 2 / 4);
+        res.innerHTML =
+            '<div class="big">' + lo + '-' + hi + ' <small>גרם חלבון ביום</small></div>' +
+            '<p>' + r.why + '</p>' +
+            '<p>בפועל: אם אוכלים 4 ארוחות ביום, זה בערך <b>' + meals + ' גרם חלבון בכל ארוחה</b>. לשם השוואה - חזה עוף (100 גר\') = 28 גר\', ביצה = 7 גר\', קוטג\' (100 גר\') = 11 גר\'.</p>';
+        res.classList.add('show');
+    });
+
+    /* ---- BMI ---- */
+    $('b-go').addEventListener('click', () => {
+        const h = num('b-h'), w = num('b-w'), res = $('b-res');
+        if (!h || !w) { res.innerHTML = '<p>חסרים גובה או משקל 🙂</p>'; res.classList.add('show'); return; }
+        const bmi = w / Math.pow(h / 100, 2);
+        let cat = '';
+        if (bmi < 18.5) cat = 'מתחת לטווח התקין - שווה לבדוק שאתה אוכל מספיק.';
+        else if (bmi < 25) cat = 'בטווח התקין 👏';
+        else if (bmi < 30) cat = 'בטווח שמוגדר "עודף משקל" - אבל זכור: אם אתה מתאמן ושרירי, המספר הזה יכול להטעות.';
+        else cat = 'בטווח שמוגדר "השמנה" - נקודת פתיחה מצוינת לעשות שינוי, ואפשר לעשות אותו בהדרגה ובנחת.';
+        res.innerHTML =
+            '<div class="big">' + bmi.toFixed(1) + '</div>' +
+            '<p>' + cat + '</p>' +
+            '<p>הטווח התקין המקובל: 18.5-24.9. אבל המספר החשוב באמת הוא <b>הרכב הגוף</b> - כמה שומן וכמה שריר - ואת זה מודדים בקליניקה.</p>';
+        res.classList.add('show');
+    });
+})();
+</script>
+</body>
+</html>
