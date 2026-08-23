@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
+<a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
 
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar scrolled">
@@ -56,7 +57,7 @@
 </header>
 
 <!-- ===== POSTS ===== -->
-<section class="section">
+<section class="section" id="main">
     <div class="container">
         <div class="blog-toolbar reveal">
             <input type="search" id="blog-search" placeholder="🔍 חיפוש מאמר... (למשל: חלבון, קפה, שינה)" aria-label="חיפוש בבלוג">
@@ -80,6 +81,8 @@
             catsEl.querySelectorAll('.cat-chip').forEach((x) => x.classList.toggle('on', x === b));
             render();
         });
+        const q0 = new URLSearchParams(location.search).get('q') || '';
+        if (q0) { document.querySelector('#blog-search').value = q0; query = q0; }
         document.querySelector('#blog-search').addEventListener('input', (e) => {
             query = e.target.value.trim();
             render();

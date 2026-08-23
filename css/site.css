@@ -635,3 +635,42 @@ img, video { max-width: 100%; height: auto; }
     .float-chip { inset-inline: auto 8px; }
     .container { overflow-wrap: anywhere; }
 }
+
+/* ===== trust strip ===== */
+.trust-strip { background: var(--card); border-block: 1px solid var(--line); padding: 18px 0; }
+.trust-strip .container { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+.ts-label { font-size: 13px; color: var(--muted); font-weight: 700; }
+.ts-marks { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.ts-mark { font-weight: 800; font-size: 15.5px; color: var(--muted); text-decoration: none; letter-spacing: 0.01em; opacity: 0.85; }
+a.ts-mark:hover { color: var(--ink); opacity: 1; }
+.ts-ynet { color: #de1a1a; font-family: Arial, sans-serif; font-weight: 900; font-size: 19px; opacity: 0.8; }
+
+/* ===== DARK MODE - follows the device setting ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0c1713; --card: #132420; --line: #24413a;
+        --ink: #e9f4ee; --body-c: #c2d4cb; --muted: #93aa9f;
+    }
+    body { background: var(--bg); color: var(--body-c); }
+    .card, .faq-item, .gl-item, .recipe-card, .act-row, .way, .calc-tile,
+    .form-card, .rc-box, .a11y-panel { background: var(--card) !important; border-color: var(--line) !important; }
+    .calc-form input, .calc-form select, .act-row input, #blog-search, .gl-search,
+    .field input, .field select, .field textarea, .seg, .seg button, .cat-chip {
+        background: #0f1d18 !important; color: var(--ink) !important; border-color: var(--line) !important;
+    }
+    .seg button.on { background: #10b981 !important; color: #04120c !important; }
+    .cat-chip.on { background: #10b981 !important; color: #04120c !important; border-color: #10b981 !important; }
+    .calc-result { background: #10231c !important; border-color: #1d4437 !important; }
+    .calc-result .row, .rc-base { background: #132420 !important; }
+    .result-card .rc-num, .calc-result .big { color: #4ade9d !important; }
+    .recipe-card .macros span, .rc-box .macros span, .step-price { background: #10231c; color: #4ade9d; }
+    .mobile-cta { background: rgba(15, 26, 22, 0.9) !important; border-color: var(--line) !important; }
+    .float-book, .a11y-panel { background: rgba(19, 36, 32, 0.85) !important; color: var(--ink); border-color: rgba(255,255,255,0.12) !important; }
+    .float-book { color: #cfe9dd; }
+    .a11y-panel button { background: #0f1d18; color: var(--ink); border-color: var(--line); }
+    .trust-strip { background: #0f1d18; }
+    .navbar.scrolled { background: rgba(8, 18, 14, 0.92); }
+    .navbar .nav-links a, .navbar .nav-logo span { color: #dcebe3; }
+    .post-body .refs li, .faq-item .a, .gl-item p { color: var(--body-c); }
+    img { filter: brightness(0.94); }
+}
