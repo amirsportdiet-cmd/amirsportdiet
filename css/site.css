@@ -566,3 +566,31 @@ html.a11y-motion *, html.a11y-motion *::before, html.a11y-motion *::after {
     animation: none !important; transition: none !important;
 }
 html.a11y-motion .reveal { opacity: 1 !important; transform: none !important; }
+
+/* ===== liquid glass (Amir 23.8) ===== */
+.float-book, .a11y-panel, .mobile-cta {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.65) !important;
+}
+.a11y-btn {
+    background: rgba(26, 86, 219, 0.82);
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.hero-dark .btn-ghost, .hero-dark .btn-light {
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+}
+.hero-dark .btn-ghost:hover, .hero-dark .btn-light:hover { background: rgba(255, 255, 255, 0.24); }
+.icon-mini { width: 22px; height: 22px; vertical-align: -4px; margin-inline-end: 6px; color: #0e5c44; }
+.calc-tile .icon-mini { width: 30px; height: 30px; display: block; margin: 0 auto 8px; }
+.rc-icon .icon-mini, .faq-group h2 .icon-mini { width: 28px; height: 28px; }
+
+a.way { text-decoration: none; color: inherit; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+a.way:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(6,32,25,0.1); }

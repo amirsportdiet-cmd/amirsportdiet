@@ -47,7 +47,7 @@ if (!/contact\.html|404/.test(location.pathname)) {
     b.className = 'float-book';
     b.href = isNutrition ? 'https://book.amirsportdiet.com/first' : '/first/';
     if (isNutrition) { b.target = '_blank'; b.rel = 'noopener'; }
-    b.innerHTML = '📅 לקביעת פגישה';
+    b.innerHTML = '<svg class="icon-mini" style="color:#0e5c44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> לקביעת פגישה';
     document.body.appendChild(b);
 })();
 
@@ -69,7 +69,7 @@ if (!/contact\.html|404/.test(location.pathname)) {
 
     const apply = () => {
         MODES.forEach(([k]) => root.classList.toggle('a11y-' + k, !!prefs[k]));
-        root.style.fontSize = prefs.fontup ? (100 + 15 * prefs.fontup) + '%' : '';
+        document.body.style.zoom = prefs.fontup ? String(1 + 0.12 * prefs.fontup) : '';
         try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch { /* ignore */ }
     };
 
@@ -77,7 +77,7 @@ if (!/contact\.html|404/.test(location.pathname)) {
     btn.className = 'a11y-btn';
     btn.setAttribute('aria-label', 'תפריט נגישות');
     btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = '\u267F';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2" fill="currentColor" stroke="none"/><path d="M4.5 8.5c5 1.4 10 1.4 15 0"/><path d="M12 9.5v4l3 7"/><path d="M12 13.5l-3 7"/></svg>';
 
     const panel = document.createElement('div');
     panel.className = 'a11y-panel';

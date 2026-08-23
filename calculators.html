@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#062019">
-    <title>מחשבונים תזונתיים - אמיר רובין | קלוריות, חלבון ו-BMI</title>
-    <meta name="description" content="מחשבונים תזונתיים פשוטים בעברית: כמה קלוריות הגוף שלך שורף ביום, כמה חלבון אתה צריך לפי המטרה שלך, ומה ה-BMI שלך - עם הסבר ברור לכל תוצאה.">
+    <title>מחשבונים תזונתיים - אמיר רובין | קלוריות, חלבון, אחוז שומן ועוד</title>
+    <meta name="description" content="מחשבונים תזונתיים פשוטים בעברית: הוצאה קלורית יומית מלאה (מנוחה + צעדים + אימונים), חלבון לפי מטרה, אחוז שומן לפי היקפים, יחס מותן-גובה ו-BMI.">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="מחשבונים תזונתיים - אמיר רובין">
-    <meta property="og:description" content="כמה קלוריות אתה שורף ביום? כמה חלבון אתה צריך? כלים פשוטים עם הסברים ברורים.">
+    <meta property="og:description" content="כמה קלוריות אתה שורף? כמה חלבון צריך? מה אחוז השומן? כלים פשוטים עם הסברים ברורים.">
     <meta property="og:url" content="https://amirsportdiet.com/calculators.html">
     <meta property="og:image" content="https://amirsportdiet.com/images/og.png">
     <meta property="og:locale" content="he_IL">
@@ -24,8 +24,21 @@
     <link rel="stylesheet" href="css/site.css">
 
     <style>
-        /* ===== calculators ===== */
-        .calc-card { max-width: 720px; margin: 0 auto 28px; }
+        /* ===== calculator picker tiles ===== */
+        .calc-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; max-width: 860px; margin: 0 auto 34px; }
+        .calc-tile {
+            background: #fff; border: 2px solid rgba(0,0,0,0.08); border-radius: 16px;
+            padding: 18px 12px; text-align: center; cursor: pointer; font: inherit;
+            transition: transform .15s, border-color .15s, box-shadow .15s;
+        }
+        .calc-tile .ico { font-size: 30px; display: block; margin-bottom: 8px; }
+        .calc-tile b { font-size: 14.5px; display: block; }
+        .calc-tile span { font-size: 12.5px; color: var(--muted); }
+        .calc-tile:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(6,32,25,0.1); }
+        .calc-tile.on { border-color: #0e5c44; background: #f0faf5; }
+        /* ===== calculator cards ===== */
+        .calc-card { max-width: 760px; margin: 0 auto 28px; display: none; }
+        .calc-card.open { display: block; }
         .calc-card h3 { font-size: 20px; margin-bottom: 4px; }
         .calc-sub { font-size: 14.5px; color: var(--muted); margin-bottom: 18px; }
         .calc-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 16px; }
@@ -47,7 +60,19 @@
         .calc-result .row { display: flex; justify-content: space-between; font-size: 14.5px; background: #fff; border-radius: 8px; padding: 8px 12px; }
         .calc-result .row b { font-variant-numeric: tabular-nums; }
         .calc-note { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
-        .calc-cta { text-align: center; margin-top: 10px; }
+        /* range bar (WHtR) */
+        .range-bar { display: flex; border-radius: 999px; overflow: hidden; height: 14px; margin: 14px 0 4px; }
+        .range-bar div { flex: 1; }
+        .range-labels { display: flex; font-size: 11.5px; color: var(--muted); }
+        .range-labels div { flex: 1; text-align: center; }
+        /* activities picker */
+        .act-list { display: grid; gap: 8px; margin: 10px 0 16px; }
+        .act-row { display: grid; grid-template-columns: 1fr 110px; gap: 10px; align-items: center; background: #fff; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 8px 12px; }
+        .act-row .nm { font-size: 14px; font-weight: 600; }
+        .act-row .nm small { color: var(--muted); font-weight: 400; }
+        .act-row input { width: 100%; padding: 8px; border: 1.5px solid rgba(0,0,0,0.14); border-radius: 8px; font: inherit; font-size: 14px; }
+        .act-add { display: flex; gap: 10px; }
+        .act-add select { flex: 1; }
     </style>
 </head>
 <body>
@@ -62,10 +87,9 @@
         <ul class="nav-links">
             <li><a href="index.html">בית</a></li>
             <li><a href="nutrition.html">ליווי תזונתי</a></li>
-            <li><a href="https://www.wellnessproject.co.il/landingpage" target="_blank" rel="noopener">פרויקט גזרה</a></li>
             <li><a href="blog/">בלוג</a></li>
             <li><a href="calculators.html" class="active">מחשבונים</a></li>
-            <li><a href="contact.html">צור קשר</a></li>
+            <li><a href="contact.html">צרו קשר</a></li>
         </ul>
         <div class="nav-cta">
             <a class="btn btn-primary btn-sm" href="https://amir-dashboard-temp.vercel.app/nt" target="_blank" rel="noopener">כניסת מלווים</a>
@@ -79,19 +103,26 @@
     <div class="container">
         <span class="badge"><span class="dot"></span> כלים חינמיים</span>
         <h1>מחשבונים <span class="grad-text">תזונתיים</span></h1>
-        <p class="lead">
-            שלושה כלים פשוטים שיעשו לך סדר: כמה קלוריות הגוף שלך שורף,
-            כמה חלבון אתה באמת צריך, ואיפה אתה עומד. בלי ז'רגון - עם הסבר ברור לכל מספר.
-        </p>
+        <p class="lead">בוחרים מחשבון - ומקבלים תשובה ברורה, בלי ז'רגון.</p>
     </div>
 </header>
 
-<!-- ===== מחשבון קלוריות ===== -->
 <section class="section">
     <div class="container">
-        <div class="card calc-card reveal" id="tdee">
-            <h3>🔥 כמה קלוריות אני שורף ביום?</h3>
-            <p class="calc-sub">ממלאים 4 פרטים - ומקבלים כמה הגוף שורף ביום, וכמה כדאי לאכול לפי המטרה.</p>
+
+        <!-- ===== picker tiles ===== -->
+        <div class="calc-tiles" id="tiles">
+            <button class="calc-tile" data-c="tdee"><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><b>הוצאה קלורית</b><span>כמה אני שורף ביום?</span></button>
+            <button class="calc-tile" data-c="protein"><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-3.1 7-7.5C19 10 16 2 12 2S5 10 5 14.5C5 18.9 8 22 12 22z"/></svg><b>חלבון יומי</b><span>כמה אני צריך?</span></button>
+            <button class="calc-tile" data-c="fat"><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg><b>אחוז שומן</b><span>לפי היקפים</span></button>
+            <button class="calc-tile" data-c="whtr"><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 8.7 15.3 2.7a1 1 0 0 0-1.4 0l-11.2 11.2a1 1 0 0 0 0 1.4l6 6a1 1 0 0 0 1.4 0l11.2-11.2a1 1 0 0 0 0-1.4z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2"/></svg><b>מותן-גובה</b><span>מדד הבריאות הפשוט</span></button>
+            <button class="calc-tile" data-c="bmi"><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14"/><path d="M5 7l-2.5 5.5a3 3 0 0 0 5.5 0L5.5 7zM18.5 7 16 12.5a3 3 0 0 0 5.5 0L19 7z"/></svg><b>BMI</b><span>מדד מסת גוף</span></button>
+        </div>
+
+        <!-- ===== 1) energy expenditure - expanded ===== -->
+        <div class="card calc-card" id="c-tdee">
+            <h3><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> כמה קלוריות אני שורף ביום?</h3>
+            <p class="calc-sub">שלושה חלקים פשוטים: הגוף במנוחה + כמה אתם זזים ביומיום (צעדים) + האימונים שלכם.</p>
             <div class="calc-form">
                 <div>
                     <label>מין</label>
@@ -100,31 +131,37 @@
                         <button type="button" data-v="f">אישה</button>
                     </div>
                 </div>
-                <div><label for="t-age">גיל</label><input id="t-age" type="number" inputmode="numeric" min="14" max="99" placeholder="למשל 35"></div>
-                <div><label for="t-h">גובה בס"מ</label><input id="t-h" type="number" inputmode="numeric" min="120" max="230" placeholder="למשל 172"></div>
-                <div><label for="t-w">משקל בק"ג</label><input id="t-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="למשל 80"></div>
+                <div><label for="t-age">גיל</label><input id="t-age" type="number" inputmode="numeric" min="14" max="99" placeholder="35"></div>
+                <div><label for="t-h">גובה בס"מ</label><input id="t-h" type="number" inputmode="numeric" min="120" max="230" placeholder="172"></div>
+                <div><label for="t-w">משקל בק"ג</label><input id="t-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="80"></div>
                 <div style="grid-column:1/-1">
-                    <label for="t-act">כמה אתה זז ביומיום?</label>
-                    <select id="t-act">
-                        <option value="1.2">כמעט לא זז - עבודה בישיבה, בלי אימונים</option>
-                        <option value="1.375" selected>זז קצת - הליכות או 1-2 אימונים קלים בשבוע</option>
-                        <option value="1.55">פעיל - 3-4 אימונים בשבוע</option>
-                        <option value="1.725">פעיל מאוד - 5-6 אימונים בשבוע</option>
-                        <option value="1.9">ספורטאי / עבודה פיזית קשה + אימונים</option>
+                    <label for="t-steps">כמה צעדים ביום בערך? (מהשעון או מהטלפון)</label>
+                    <select id="t-steps">
+                        <option value="2000">כמעט לא הולך - עד 3,000</option>
+                        <option value="5000" selected>קצת - בערך 5,000</option>
+                        <option value="8000">בינוני - בערך 8,000</option>
+                        <option value="11000">הרבה - בערך 11,000</option>
+                        <option value="15000">המון - 14,000 ומעלה</option>
                     </select>
                 </div>
             </div>
+            <label style="font-size:13.5px;font-weight:700">האימונים שלי בשבוע (אפשר להוסיף כמה שרוצים):</label>
+            <div class="act-list" id="act-list"></div>
+            <div class="act-add calc-form" style="margin-bottom:16px">
+                <select id="act-pick"></select>
+                <button class="btn btn-ghost btn-sm" id="act-add" type="button">+ הוספה</button>
+            </div>
             <button class="btn btn-primary" id="t-go">חשב לי</button>
             <div class="calc-result" id="t-res"></div>
-            <p class="calc-note">החישוב לפי נוסחת Mifflin-St Jeor - הנוסחה המקובלת במחקר. זו הערכה טובה, אבל כל גוף קצת שונה.</p>
+            <p class="calc-note">מנוחה לפי נוסחת Mifflin-St Jeor, אימונים לפי ערכי MET מקובלים (Compendium of Physical Activities). זו הערכה טובה - כל גוף קצת שונה.</p>
         </div>
 
-        <!-- ===== מחשבון חלבון ===== -->
-        <div class="card calc-card reveal" id="protein">
-            <h3>🥚 כמה חלבון אני צריך ביום?</h3>
+        <!-- ===== 2) protein ===== -->
+        <div class="card calc-card" id="c-protein">
+            <h3><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-3.1 7-7.5C19 10 16 2 12 2S5 10 5 14.5C5 18.9 8 22 12 22z"/></svg> כמה חלבון אני צריך ביום?</h3>
             <p class="calc-sub">כמות החלבון תלויה במשקל ובמטרה - לא צריך יותר מזה כדי לחשב.</p>
             <div class="calc-form">
-                <div><label for="p-w">משקל בק"ג</label><input id="p-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="למשל 80"></div>
+                <div><label for="p-w">משקל בק"ג</label><input id="p-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="80"></div>
                 <div>
                     <label for="p-goal">מה המטרה שלך?</label>
                     <select id="p-goal">
@@ -137,25 +174,62 @@
             </div>
             <button class="btn btn-primary" id="p-go">חשב לי</button>
             <div class="calc-result" id="p-res"></div>
-            <p class="calc-note">לפי המחקרים העדכניים: 1.8-2.7 גר'/ק"ג בחיטוב, 1.4-2.6 בעלייה במסה, 1.2-1.8 לשמירה, ומעל גיל 60 - לפחות 1.0-1.2. שווה לקרוא על זה עוד <a href="blog/post.html?p=nutrition-training-60plus">בבלוג</a>.</p>
+            <p class="calc-note">לפי המחקרים העדכניים: 1.8-2.7 גר'/ק"ג בחיטוב, 1.4-2.6 בעלייה במסה, 1.2-1.8 לשמירה, ומעל גיל 60 לפחות 1.0-1.2. <a href="blog/post.html?p=protein-intake">המאמר המלא בבלוג</a>.</p>
         </div>
 
-        <!-- ===== BMI ===== -->
-        <div class="card calc-card reveal" id="bmi">
-            <h3>⚖️ מה ה-BMI שלי?</h3>
+        <!-- ===== 3) body fat % (Lahav 2018) ===== -->
+        <div class="card calc-card" id="c-fat">
+            <h3><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg> מה אחוז השומן שלי? (לפי היקפים)</h3>
+            <p class="calc-sub">שיטה מחקרית פשוטה: סרט מדידה, שלוש מדידות - והערכה טובה של אחוז השומן. מודדים היקף בטן בגובה הטבור, והיקף צוואר מתחת לגרוגרת.</p>
+            <div class="calc-form">
+                <div>
+                    <label>מין</label>
+                    <div class="seg" id="f-sex">
+                        <button type="button" class="on" data-v="m">גבר</button>
+                        <button type="button" data-v="f">אישה</button>
+                    </div>
+                </div>
+                <div><label for="f-h">גובה בס"מ</label><input id="f-h" type="number" inputmode="numeric" min="120" max="230" placeholder="172"></div>
+                <div><label for="f-a">היקף בטן בס"מ</label><input id="f-a" type="number" inputmode="decimal" min="50" max="200" step="0.5" placeholder="88"></div>
+                <div><label for="f-n">היקף צוואר בס"מ</label><input id="f-n" type="number" inputmode="decimal" min="25" max="60" step="0.5" placeholder="38"></div>
+            </div>
+            <button class="btn btn-primary" id="f-go">חשב לי</button>
+            <div class="calc-result" id="f-res"></div>
+            <p class="calc-note">מבוסס על מחקר ישראלי: <a href="https://pubmed.ncbi.nlm.nih.gov/29553036/" target="_blank" rel="noopener" dir="ltr">Lahav Y, et al. Br J Nutr 2018</a> - נוסחה שפותחה ותוקפה מול מדידות מעבדה. זו הערכה - מדידת הרכב גוף מלאה עושים בקליניקה במכשיר SECA.</p>
+        </div>
+
+        <!-- ===== 4) WHtR ===== -->
+        <div class="card calc-card" id="c-whtr">
+            <h3><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 8.7 15.3 2.7a1 1 0 0 0-1.4 0l-11.2 11.2a1 1 0 0 0 0 1.4l6 6a1 1 0 0 0 1.4 0l11.2-11.2a1 1 0 0 0 0-1.4z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2"/></svg> יחס מותן-גובה (WHtR)</h3>
+            <p class="calc-sub">אחד המדדים הפשוטים והטובים לסיכון בריאותי: היקף המותן צריך להיות פחות מחצי מהגובה. שתי מדידות וזהו.</p>
+            <div class="calc-form">
+                <div><label for="w-waist">היקף מותן בס"מ (בגובה הטבור)</label><input id="w-waist" type="number" inputmode="decimal" min="40" max="200" step="0.5" placeholder="88"></div>
+                <div><label for="w-h">גובה בס"מ</label><input id="w-h" type="number" inputmode="numeric" min="120" max="230" placeholder="172"></div>
+            </div>
+            <button class="btn btn-primary" id="w-go">חשב לי</button>
+            <div class="calc-result" id="w-res"></div>
+            <p class="calc-note">הטווחים המקובלים: מתחת ל-0.4 רזון · 0.4-0.5 תקין · 0.5-0.6 סיכון מוגבר · מעל 0.6 סיכון גבוה.</p>
+        </div>
+
+        <!-- ===== 5) BMI ===== -->
+        <div class="card calc-card" id="c-bmi">
+            <h3><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M8 21h8M5 7h14"/><path d="M5 7l-2.5 5.5a3 3 0 0 0 5.5 0L5.5 7zM18.5 7 16 12.5a3 3 0 0 0 5.5 0L19 7z"/></svg> מה ה-BMI שלי?</h3>
             <p class="calc-sub">מדד מסת הגוף - נקודת פתיחה מקובלת, אבל חשוב להבין גם את המגבלה שלו.</p>
             <div class="calc-form">
-                <div><label for="b-h">גובה בס"מ</label><input id="b-h" type="number" inputmode="numeric" min="120" max="230" placeholder="למשל 172"></div>
-                <div><label for="b-w">משקל בק"ג</label><input id="b-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="למשל 80"></div>
+                <div><label for="b-h">גובה בס"מ</label><input id="b-h" type="number" inputmode="numeric" min="120" max="230" placeholder="172"></div>
+                <div><label for="b-w">משקל בק"ג</label><input id="b-w" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="80"></div>
             </div>
             <button class="btn btn-primary" id="b-go">חשב לי</button>
             <div class="calc-result" id="b-res"></div>
-            <p class="calc-note">חשוב לדעת: BMI לא מבדיל בין שריר לשומן - מתאמן שרירי יכול לקבל "עודף משקל" בטעות. בקליניקה אנחנו מודדים הרכב גוף אמיתי במכשיר InBody.</p>
+            <p class="calc-note">חשוב לדעת: BMI לא מבדיל בין שריר לשומן - מתאמן שרירי יכול לקבל "עודף משקל" בטעות. המספר החשוב באמת הוא הרכב הגוף, ואותו מודדים בקליניקה.</p>
         </div>
 
-        <div class="calc-cta reveal">
-            <p style="margin-bottom:12px;font-size:15.5px">רוצה שמישהו יעשה לך סדר במספרים האלה - ויבנה מהם תוכנית אמיתית?</p>
-            <a class="btn btn-primary btn-lg" href="contact.html">דברו איתי בוואטסאפ ←</a>
+        <div style="text-align:center;margin-top:12px" class="reveal">
+            <p style="margin-bottom:12px;font-size:15.5px">רוצה שמישהו יעשה לך סדר במספרים - ויבנה מהם תוכנית אמיתית?</p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                <a class="btn btn-primary btn-lg" href="first/"><svg class="icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> לתיאום פגישה</a>
+                <a class="btn btn-ghost btn-lg" href="contact.html">השאירו פרטים</a>
+            </div>
         </div>
     </div>
 </section>
@@ -181,7 +255,7 @@
                     <li><a href="blog/">בלוג</a></li>
                     <li><a href="calculators.html">מחשבונים</a></li>
                     <li><a href="faq.html">שאלות נפוצות</a></li>
-                    <li><a href="contact.html">צור קשר</a></li>
+                    <li><a href="contact.html">צרו קשר</a></li>
                     <li><a href="accessibility.html">הצהרת נגישות</a></li>
                     <li><a href="https://amir-dashboard-temp.vercel.app/nt" target="_blank" rel="noopener">כניסת מלווים</a></li>
                 </ul>
@@ -196,7 +270,7 @@
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">© <span id="year"></span> אמיר רובין · amirsportdiet.com</div>
+        <div class="footer-bottom">© <span id="year"></span> אמיר רובין · amirsportdiet.com · <a href="privacy.html" style="color:inherit">מדיניות פרטיות</a></div>
     </div>
 </footer>
 
@@ -208,49 +282,102 @@
     const num = (id) => { const v = parseFloat($(id).value); return isFinite(v) ? v : null; };
     const fmt = (n) => Math.round(n).toLocaleString('he-IL');
 
-    /* ---- sync weight between calculators: fill once, works everywhere ---- */
-    ['t-w', 'p-w', 'b-w'].forEach((id) => $(id).addEventListener('input', () => {
-        ['t-w', 'p-w', 'b-w'].forEach((o) => { if (o !== id && !$(o).matches(':focus')) $(o).value = $(id).value; });
-    }));
-    ['t-h', 'b-h'].forEach((id) => $(id).addEventListener('input', () => {
-        const o = id === 't-h' ? 'b-h' : 't-h';
-        if (!$(o).matches(':focus')) $(o).value = $(id).value;
-    }));
+    /* ===== tile picker: one calculator open at a time ===== */
+    const tiles = document.querySelectorAll('.calc-tile');
+    const openCalc = (key, scroll) => {
+        tiles.forEach((t) => t.classList.toggle('on', t.dataset.c === key));
+        document.querySelectorAll('.calc-card').forEach((c) => c.classList.toggle('open', c.id === 'c-' + key));
+        if (history.replaceState) history.replaceState(null, '', '#' + key);
+        if (scroll) {
+            const el = $('c-' + key);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+    tiles.forEach((t) => t.addEventListener('click', () => openCalc(t.dataset.c, true)));
+    const initial = (location.hash || '').replace('#', '');
+    openCalc(['tdee', 'protein', 'fat', 'whtr', 'bmi'].includes(initial) ? initial : 'tdee', false);
 
-    /* ---- sex segmented control ---- */
-    let sex = 'm';
-    $('t-sex').addEventListener('click', (e) => {
-        const b = e.target.closest('button');
-        if (!b) return;
-        sex = b.dataset.v;
-        $('t-sex').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+    /* ===== shared: sync height/weight between calculators ===== */
+    const syncGroups = [['t-w', 'p-w', 'b-w'], ['t-h', 'f-h', 'w-h', 'b-h']];
+    syncGroups.forEach((g) => g.forEach((id) => $(id).addEventListener('input', () => {
+        g.forEach((o) => { if (o !== id && !$(o).matches(':focus')) $(o).value = $(id).value; });
+    })));
+
+    const segVal = { t: 'm', f: 'm' };
+    ['t', 'f'].forEach((pfx) => {
+        $(pfx + '-sex').addEventListener('click', (e) => {
+            const b = e.target.closest('button');
+            if (!b) return;
+            segVal[pfx] = b.dataset.v;
+            $(pfx + '-sex').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+        });
     });
 
-    /* ---- calories (Mifflin-St Jeor) ---- */
+    /* ===== 1) energy expenditure: BMR + steps + METs ===== */
+    const ACTS = [
+        ['הליכה רגילה', 3.0], ['הליכה מהירה', 4.3], ['ריצה קלה (8 קמ"ש)', 8.3],
+        ['ריצה (10 קמ"ש)', 9.8], ['אופניים / ספינינג', 6.8], ['שחייה', 6.0],
+        ['אימון משקולות', 3.5], ['אימון פונקציונלי / קרוספיט', 8.0], ['HIIT', 8.0],
+        ['יוגה', 2.5], ['פילאטיס', 3.0], ['כדורגל', 7.0], ['כדורסל', 6.5],
+        ['טניס / פדל', 7.3], ['ריקוד', 4.5], ['אליפטיקל', 5.0], ['הליכה בעלייה / טיולים', 6.0],
+    ];
+    $('act-pick').innerHTML = ACTS.map(([n], i) => `<option value="${i}">${n}</option>`).join('');
+    const chosen = [];
+    const paintActs = () => {
+        $('act-list').innerHTML = chosen.map((c, i) => `
+            <div class="act-row">
+                <div class="nm">${ACTS[c.i][0]} <small>· כמה דקות בשבוע?</small>
+                    <a href="#" data-del="${i}" style="color:#c33;font-size:12px;margin-inline-start:8px">הסרה</a></div>
+                <input type="number" inputmode="numeric" min="0" max="2000" placeholder="דקות" value="${c.min || ''}" data-min="${i}">
+            </div>`).join('');
+    };
+    $('act-add').addEventListener('click', () => {
+        chosen.push({ i: Number($('act-pick').value), min: 60 });
+        paintActs();
+    });
+    $('act-list').addEventListener('click', (e) => {
+        const d = e.target.closest('[data-del]');
+        if (d) { e.preventDefault(); chosen.splice(Number(d.dataset.del), 1); paintActs(); }
+    });
+    $('act-list').addEventListener('input', (e) => {
+        const inp = e.target.closest('[data-min]');
+        if (inp) chosen[Number(inp.dataset.min)].min = Number(inp.value) || 0;
+    });
+
     $('t-go').addEventListener('click', () => {
-        const age = num('t-age'), h = num('t-h'), w = num('t-w'), act = parseFloat($('t-act').value);
+        const age = num('t-age'), h = num('t-h'), w = num('t-w');
         const res = $('t-res');
         if (!age || !h || !w) { res.innerHTML = '<p>חסרים כמה פרטים למעלה 🙂</p>'; res.classList.add('show'); return; }
-        const bmr = 10 * w + 6.25 * h - 5 * age + (sex === 'm' ? 5 : -161);
-        const tdee = bmr * act;
+        const bmr = 10 * w + 6.25 * h - 5 * age + (segVal.t === 'm' ? 5 : -161);
+        const steps = Number($('t-steps').value);
+        const stepsKcal = steps * w * 0.0005;                       // net cost of daily walking
+        const exKcal = chosen.reduce((s, c) =>                      // net MET cost, weekly -> daily
+            s + (ACTS[c.i][1] - 1) * w * ((c.min || 0) / 60), 0) / 7;
+        const total = (bmr + stepsKcal + exKcal) * 1.1;             // +10% digestion (TEF)
         res.innerHTML =
-            '<div class="big">' + fmt(tdee) + ' <small>קלוריות ביום</small></div>' +
-            '<p>זו בערך הכמות שהגוף שלך שורף ביממה שלמה, כולל הפעילות. מזה נגזר כמה כדאי לאכול:</p>' +
+            '<div class="big">' + fmt(total) + ' <small>קלוריות ביום</small></div>' +
+            '<p>ככה זה מתחלק:</p>' +
             '<div class="rows">' +
-            '<div class="row"><span>📉 כדי לרדת במשקל בקצב בריא</span><b>' + fmt(tdee - 500) + '-' + fmt(tdee - 300) + '</b></div>' +
-            '<div class="row"><span>⚖️ כדי לשמור על המשקל</span><b>' + fmt(tdee) + '</b></div>' +
-            '<div class="row"><span>💪 כדי לעלות במסה (בשילוב אימוני כוח)</span><b>' + fmt(tdee + 200) + '-' + fmt(tdee + 400) + '</b></div>' +
+            '<div class="row"><span>😴 הגוף במנוחה (רק כדי להתקיים)</span><b>' + fmt(bmr) + '</b></div>' +
+            '<div class="row"><span>🚶 תנועה יומיומית (' + steps.toLocaleString('he-IL') + ' צעדים)</span><b>' + fmt(stepsKcal) + '</b></div>' +
+            '<div class="row"><span>🏋️ אימונים (ממוצע יומי)</span><b>' + fmt(exKcal) + '</b></div>' +
+            '<div class="row"><span>🍽️ עיכול המזון (~10%)</span><b>' + fmt(total - bmr - stepsKcal - exKcal) + '</b></div>' +
             '</div>' +
-            '<p style="margin-top:10px">בלי אף פעילות, רק לקיום הגוף (BMR): כ-' + fmt(bmr) + ' קלוריות.</p>';
+            '<p style="margin-top:10px">ומה עושים עם זה?</p>' +
+            '<div class="rows">' +
+            '<div class="row"><span>📉 לירידה במשקל בקצב בריא</span><b>' + fmt(total - 500) + '-' + fmt(total - 300) + '</b></div>' +
+            '<div class="row"><span>⚖️ לשמירה על המשקל</span><b>' + fmt(total) + '</b></div>' +
+            '<div class="row"><span>💪 לעלייה במסה (עם אימוני כוח)</span><b>' + fmt(total + 200) + '-' + fmt(total + 400) + '</b></div>' +
+            '</div>';
         res.classList.add('show');
     });
 
-    /* ---- protein ---- */
+    /* ===== 2) protein ===== */
     const P_RANGES = {
         cut:    { lo: 1.8, hi: 2.7, why: 'בזמן ירידה במשקל צריך יותר חלבון - כדי שהירידה תגיע משומן ולא משריר.' },
         mass:   { lo: 1.4, hi: 2.6, why: 'לבניית שריר, יחד עם אימוני התנגדות. יותר מזה - כבר לא תורם.' },
         fit:    { lo: 1.2, hi: 1.8, why: 'לשמירה על מסת השריר והבריאות ביומיום.' },
-        senior: { lo: 1.2, hi: 1.6, why: 'מעל גיל 60 הגוף זקוק ליותר חלבון כדי למנוע אובדן שריר (סרקופניה). ההמלצה הרשמית הישנה של 0.8 - כבר לא מספיקה.' },
+        senior: { lo: 1.2, hi: 1.6, why: 'מעל גיל 60 הגוף זקוק ליותר חלבון כדי למנוע אובדן שריר (סרקופניה).' },
     };
     $('p-go').addEventListener('click', () => {
         const w = num('p-w'), r = P_RANGES[$('p-goal').value], res = $('p-res');
@@ -260,24 +387,62 @@
         res.innerHTML =
             '<div class="big">' + lo + '-' + hi + ' <small>גרם חלבון ביום</small></div>' +
             '<p>' + r.why + '</p>' +
-            '<p>בפועל: אם אוכלים 4 ארוחות ביום, זה בערך <b>' + meals + ' גרם חלבון בכל ארוחה</b>. לשם השוואה - חזה עוף (100 גר\') = 28 גר\', ביצה = 7 גר\', קוטג\' (100 גר\') = 11 גר\'.</p>';
+            '<p>בפועל: ב-4 ארוחות ביום זה בערך <b>' + meals + ' גרם בכל ארוחה</b>. להשוואה - חזה עוף (100 גר\') = 28 גר\', ביצה = 7 גר\', קוטג\' (100 גר\') = 11 גר\'.</p>';
         res.classList.add('show');
     });
 
-    /* ---- BMI ---- */
+    /* ===== 3) body fat % - Lahav et al. 2018 (Br J Nutr, PMID 29553036) ===== */
+    $('f-go').addEventListener('click', () => {
+        const h = num('f-h'), a = num('f-a'), n = num('f-n'), res = $('f-res');
+        if (!h || !a || !n) { res.innerHTML = '<p>חסרות מדידות למעלה 🙂</p>'; res.classList.add('show'); return; }
+        const male = segVal.f === 'm';
+        let bf = (male ? 10.1 : 19.2) - 0.239 * h + 0.8 * a - 0.5 * n;
+        bf = Math.max(3, Math.min(60, bf));
+        const [okLo, okHi] = male ? [10, 20] : [18, 28];
+        let cat;
+        if (bf < okLo) cat = 'מתחת לטווח האופייני - רזה מאוד.';
+        else if (bf <= okHi) cat = 'בטווח בריא ואופייני 👏';
+        else if (bf <= okHi + 7) cat = 'מעל הטווח המומלץ - יש לאן להתקדם, ובהחלט אפשרי.';
+        else cat = 'גבוה משמעותית מהטווח המומלץ - נקודת פתיחה מצוינת לשינוי אמיתי.';
+        res.innerHTML =
+            '<div class="big">' + bf.toFixed(1) + '<small>% שומן (הערכה)</small></div>' +
+            '<p>' + cat + '</p>' +
+            '<p>טווח בריא אופייני ל' + (male ? 'גברים: 10-20%' : 'נשים: 18-28%') + '. זו הערכה לפי היקפים - מדידת הרכב גוף מלאה עושים בקליניקה.</p>';
+        res.classList.add('show');
+    });
+
+    /* ===== 4) WHtR ===== */
+    $('w-go').addEventListener('click', () => {
+        const waist = num('w-waist'), h = num('w-h'), res = $('w-res');
+        if (!waist || !h) { res.innerHTML = '<p>חסרות מדידות 🙂</p>'; res.classList.add('show'); return; }
+        const r = waist / h;
+        let cat, tip;
+        if (r < 0.4) { cat = 'רזון'; tip = 'המותן צרה מאוד יחסית לגובה - שווה לוודא שאוכלים מספיק.'; }
+        else if (r < 0.5) { cat = 'תקין 👏'; tip = 'המותן פחות מחצי מהגובה - בדיוק איפה שרוצים להיות.'; }
+        else if (r < 0.6) { cat = 'סיכון מוגבר'; tip = 'הכלל הפשוט: היקף המותן צריך להיות פחות מחצי מהגובה. ירידה של כמה ס"מ בהיקף תוריד משמעותית את הסיכון הבריאותי.'; }
+        else { cat = 'סיכון גבוה'; tip = 'שומן בטני קשור לסיכון מטבולי מוגבר - החדשות הטובות: הוא גם הראשון שיורד כשמתחילים תהליך נכון.'; }
+        res.innerHTML =
+            '<div class="big">' + r.toFixed(2) + '<small> · ' + cat + '</small></div>' +
+            '<div class="range-bar"><div style="background:#8ecae6"></div><div style="background:#2a9d5c"></div><div style="background:#f4a261"></div><div style="background:#e76f51"></div></div>' +
+            '<div class="range-labels"><div>&lt;0.4<br>רזון</div><div>0.4-0.5<br>תקין</div><div>0.5-0.6<br>מוגבר</div><div>&gt;0.6<br>גבוה</div></div>' +
+            '<p>' + tip + '</p>';
+        res.classList.add('show');
+    });
+
+    /* ===== 5) BMI ===== */
     $('b-go').addEventListener('click', () => {
         const h = num('b-h'), w = num('b-w'), res = $('b-res');
         if (!h || !w) { res.innerHTML = '<p>חסרים גובה או משקל 🙂</p>'; res.classList.add('show'); return; }
         const bmi = w / Math.pow(h / 100, 2);
-        let cat = '';
+        let cat;
         if (bmi < 18.5) cat = 'מתחת לטווח התקין - שווה לבדוק שאתה אוכל מספיק.';
         else if (bmi < 25) cat = 'בטווח התקין 👏';
         else if (bmi < 30) cat = 'בטווח שמוגדר "עודף משקל" - אבל זכור: אם אתה מתאמן ושרירי, המספר הזה יכול להטעות.';
-        else cat = 'בטווח שמוגדר "השמנה" - נקודת פתיחה מצוינת לעשות שינוי, ואפשר לעשות אותו בהדרגה ובנחת.';
+        else cat = 'בטווח שמוגדר "השמנה" - נקודת פתיחה מצוינת לעשות שינוי, בהדרגה ובנחת.';
         res.innerHTML =
             '<div class="big">' + bmi.toFixed(1) + '</div>' +
             '<p>' + cat + '</p>' +
-            '<p>הטווח התקין המקובל: 18.5-24.9. אבל המספר החשוב באמת הוא <b>הרכב הגוף</b> - כמה שומן וכמה שריר - ואת זה מודדים בקליניקה.</p>';
+            '<p>הטווח התקין המקובל: 18.5-24.9. רוצה מספר מדויק יותר? נסה את מחשבון <b>אחוז השומן</b> או <b>מותן-גובה</b> למעלה.</p>';
         res.classList.add('show');
     });
 })();
