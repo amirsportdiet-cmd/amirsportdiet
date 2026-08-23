@@ -40,6 +40,86 @@ if (!/contact\.html|404/.test(location.pathname)) {
     document.body.classList.add('has-ctabar');
 }
 
+/* floating booking button: /first/ everywhere; direct calendar on the nutrition page */
+(() => {
+    const isNutrition = /nutrition\.html$/.test(location.pathname);
+    const b = document.createElement('a');
+    b.className = 'float-book';
+    b.href = isNutrition ? 'https://book.amirsportdiet.com/first' : '/first/';
+    if (isNutrition) { b.target = '_blank'; b.rel = 'noopener'; }
+    b.innerHTML = '📅 לקביעת פגישה';
+    document.body.appendChild(b);
+})();
+
+/* ===== accessibility widget (left side) ===== */
+(() => {
+    const root = document.documentElement;
+    const KEY = 'a11y_prefs';
+    let prefs = {};
+    try { prefs = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { prefs = {}; }
+
+    const MODES = [
+        ['fontup', 'הגדלת טקסט'],
+        ['contrast', 'ניגודיות גבוהה'],
+        ['gray', 'גווני אפור'],
+        ['links', 'הדגשת קישורים'],
+        ['font', 'פונט קריא'],
+        ['motion', 'עצירת אנימציות'],
+    ];
+
+    const apply = () => {
+        MODES.forEach(([k]) => root.classList.toggle('a11y-' + k, !!prefs[k]));
+        root.style.fontSize = prefs.fontup ? (100 + 15 * prefs.fontup) + '%' : '';
+        try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch { /* ignore */ }
+    };
+
+    const btn = document.createElement('button');
+    btn.className = 'a11y-btn';
+    btn.setAttribute('aria-label', 'תפריט נגישות');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = '\u267F';
+
+    const panel = document.createElement('div');
+    panel.className = 'a11y-panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-label', 'אפשרויות נגישות');
+    const IN_BLOG2 = /\/blog\//.test(location.pathname);
+    panel.innerHTML = '<h4>נגישות</h4>' +
+        MODES.map(([k, label]) =>
+            `<button type="button" data-k="${k}">${k === 'fontup' ? 'הגדלת טקסט (א+)' : label}</button>`).join('') +
+        '<button type="button" data-k="__reset">איפוס הגדרות</button>' +
+        `<a href="${IN_BLOG2 ? '../' : ''}accessibility.html">להצהרת הנגישות המלאה</a>`;
+
+    panel.addEventListener('click', (e) => {
+        const b = e.target.closest('button[data-k]');
+        if (!b) return;
+        const k = b.dataset.k;
+        if (k === '__reset') { prefs = {}; }
+        else if (k === 'fontup') { prefs.fontup = ((prefs.fontup || 0) + 1) % 3; }
+        else { prefs[k] = !prefs[k]; }
+        apply(); paint();
+    });
+
+    const paint = () => {
+        panel.querySelectorAll('button[data-k]').forEach((b) => {
+            const k = b.dataset.k;
+            b.classList.toggle('on', k !== '__reset' && !!prefs[k]);
+        });
+    };
+
+    btn.addEventListener('click', () => {
+        const open = panel.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { panel.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    });
+
+    document.body.appendChild(btn);
+    document.body.appendChild(panel);
+    apply(); paint();
+})();
+
 /* WhatsApp links: every element with data-wa gets a prefilled chat link */
 document.querySelectorAll('[data-wa]').forEach((el) => {
     const msg = el.getAttribute('data-wa') || 'היי אמיר, אשמח לשמוע פרטים';
