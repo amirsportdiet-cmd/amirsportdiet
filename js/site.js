@@ -19,8 +19,19 @@ if (mainTarget) {
 if (!/contact\.html|404/.test(location.pathname)) {
     const bar = document.createElement('div');
     bar.className = 'mobile-cta';
+    const PAGE_WA = {
+        'nutrition': 'היי אמיר, אשמח לשמוע פרטים על ליווי תזונתי אישי',
+        'glp1': 'היי אמיר, אני בטיפול GLP-1 ואשמח לשמוע על הליווי',
+        'calculators': 'היי אמיר, השתמשתי במחשבונים באתר ואשמח לעזרה עם המספרים',
+        'faq': 'היי אמיר, יש לי שאלה שלא מצאתי באתר',
+        'contact': 'היי אמיר, אשמח לקבוע שיחת היכרות',
+        'directions': 'היי אמיר, אני בדרך לקליניקה ויש לי שאלה',
+        'blog': 'היי אמיר, קראתי בבלוג שלך ויש לי שאלה',
+    };
+    const pageKey = IN_BLOG ? 'blog' : (location.pathname.split('/').pop() || 'index').replace('.html', '');
+    const pageMsg = PAGE_WA[pageKey] || 'היי אמיר, אשמח לשמוע פרטים';
     bar.innerHTML = `
-        <a class="btn btn-wa" data-wa="היי אמיר, אשמח לשמוע פרטים">
+        <a class="btn btn-wa" data-wa="${pageMsg}">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.1-1.7 1.2-.4 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.4.1.6-.1l.7-.9c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.3z"/></svg>
             וואטסאפ
         </a>
