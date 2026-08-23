@@ -120,6 +120,14 @@ if (!/contact\.html|404/.test(location.pathname)) {
     apply(); paint();
 })();
 
+/* anonymous page-view beacon - no cookies, no PII (aggregated daily counters) */
+try {
+    navigator.sendBeacon('https://us-central1-wellnessprojectar.cloudfunctions.net/siteApi',
+        new Blob([JSON.stringify({ t: 'hit', p: location.pathname + location.search.replace(/^\?p=/, ':'),
+            r: document.referrer || '', m: matchMedia('(max-width: 768px)').matches ? 1 : 0 })],
+            { type: 'application/json' }));
+} catch { /* ignore */ }
+
 /* WhatsApp links: every element with data-wa gets a prefilled chat link */
 document.querySelectorAll('[data-wa]').forEach((el) => {
     const msg = el.getAttribute('data-wa') || 'היי אמיר, אשמח לשמוע פרטים';

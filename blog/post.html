@@ -32,7 +32,7 @@
             <li><a href="../index.html">בית</a></li>
             <li><a href="../nutrition.html">ליווי תזונתי</a></li>
             <li><a href="../blog/" class="active">בלוג</a></li>
-            <li><a href="../calculators.html">מחשבונים</a></li>
+                    <li><a href="../calculators.html">מחשבונים</a></li>
             <li><a href="../contact.html">צרו קשר</a></li>
         </ul>
         <div class="nav-cta">
@@ -90,6 +90,8 @@
                     <li><a href="../about.html">אודות</a></li>
                     <li><a href="../blog/">בלוג</a></li>
                     <li><a href="../calculators.html">מחשבונים</a></li>
+                    <li><a href="../recipes.html">מתכונים</a></li>
+                    <li><a href="../glossary.html">מילון מונחים</a></li>
                     <li><a href="../faq.html">שאלות נפוצות</a></li>
                     <li><a href="../contact.html">צרו קשר</a></li>
                     <li><a href="../accessibility.html">הצהרת נגישות</a></li>
@@ -195,6 +197,34 @@
     }
     flushPara(); flushList();
     bodyEl.innerHTML = html;
+
+    /* read time (200 wpm) */
+    const words = md.split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words / 200));
+    const metaEl = document.querySelector('#post-meta');
+    metaEl.textContent += ` · ${mins} דק' קריאה`;
+
+    /* WhatsApp share button */
+    bodyEl.insertAdjacentHTML('beforeend',
+        `<div style="text-align:center;margin-top:30px">
+            <a class="btn btn-wa" target="_blank" rel="noopener"
+               href="https://wa.me/?text=${encodeURIComponent(post.title + String.fromCharCode(10) + location.href)}">
+               📤 שתפו את המאמר בוואטסאפ</a>
+         </div>`);
+
+    /* PRIME recruiting banner on relevant topics (aging / GLP-1 / protein / muscle) */
+    const PRIME_SLUGS = ['nutrition-training-60plus', 'protein-intake', 'resistance-training',
+        'exercise-bone-density', 'best-protein', 'strength-training-cut'];
+    if (PRIME_SLUGS.includes(post.slug) || /גיל שלישי|GLP-1/.test(post.tag || '')) {
+        bodyEl.insertAdjacentHTML('beforeend',
+            `<div class="card" style="margin-top:26px;background:#f0f6ff;border-color:#c4d8f5">
+                <h3 style="margin-bottom:6px">🔬 מחקר PRIME מחפש משתתפים</h3>
+                <p style="font-size:14.5px">אני חלק מצוות מחקר קליני שבוחן תזונה, חלבון ותפקוד גופני.
+                   מעניין אתכם להשתתף ולתרום למדע (וגם לקבל ליווי מחקרי צמוד)?
+                   <a href="https://primestudy.co.il" target="_blank" rel="noopener"><b>כל הפרטים כאן ←</b></a></p>
+             </div>`);
+    }
+    /* mark read-time so this patch is idempotent: read-time */
 
     /* hero image from posts.js */
     if (post.image) bodyEl.insertAdjacentHTML('afterbegin',

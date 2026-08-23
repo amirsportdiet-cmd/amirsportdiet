@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#062019">
+    <title>המתכונים של אמיר - מתכונים בריאים ועשירים בחלבון</title>
+    <meta name="description" content="מתכונים בריאים, פשוטים ועשירים בחלבון מהקליניקה של אמיר רובין - עם ערכים תזונתיים מדויקים לכל מנה. מתעדכן כל הזמן.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="המתכונים של אמיר">
+    <meta property="og:description" content="מתכונים בריאים ועשירים בחלבון - עם ערכים תזונתיים לכל מנה.">
+    <meta property="og:url" content="https://amirsportdiet.com/recipes.html">
+    <meta property="og:image" content="https://amirsportdiet.com/images/og.png">
+    <meta property="og:locale" content="he_IL">
+    <link rel="canonical" href="https://amirsportdiet.com/recipes.html">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/site.css">
+    <style>
+        .rc-cats { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 24px; }
+        .rc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+        .recipe-card { background: #fff; border: 1.5px solid rgba(0,0,0,0.08); border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+        .recipe-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(6,32,25,0.1); }
+        .recipe-card .im { height: 150px; background: #eef5f1; }
+        .recipe-card .im img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .recipe-card .bd { padding: 14px 16px; }
+        .recipe-card h3 { font-size: 15.5px; margin-bottom: 4px; }
+        .recipe-card p { font-size: 13px; color: var(--muted); }
+        .recipe-card .macros { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .recipe-card .macros span { background: #f0faf5; color: #0e5c44; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; }
+        /* modal */
+        .rc-modal { position: fixed; inset: 0; background: rgba(6,32,25,0.5); z-index: 1200; display: none; align-items: flex-start; justify-content: center; padding: 24px 12px; overflow-y: auto; }
+        .rc-modal.open { display: flex; }
+        .rc-box { background: #fff; border-radius: 18px; max-width: 620px; width: 100%; padding: 24px; position: relative; }
+        .rc-box h2 { font-size: 21px; margin-bottom: 6px; padding-inline-end: 30px; }
+        .rc-box .x { position: absolute; top: 14px; inset-inline-end: 16px; border: 0; background: none; font-size: 22px; cursor: pointer; color: var(--muted); }
+        .rc-box img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 12px; margin: 10px 0; }
+        .rc-box h4 { font-size: 15.5px; margin: 16px 0 6px; }
+        .rc-box ul, .rc-box ol { padding-inline-start: 20px; font-size: 14.5px; line-height: 1.8; }
+        .rc-box .macros { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+        .rc-box .macros span { background: #f0faf5; color: #0e5c44; border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar scrolled">
+    <div class="navbar-inner">
+        <a href="index.html" class="nav-logo">
+            <span class="logo-dot"><img src="images/logo.png" alt="לוגו אמיר רובין"></span>
+            <span>אמיר רובין<small>תזונה · ספורט · מדע</small></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">בית</a></li>
+            <li><a href="nutrition.html">ליווי תזונתי</a></li>
+            <li><a href="blog/">בלוג</a></li>
+            <li><a href="calculators.html">מחשבונים</a></li>
+            <li><a href="contact.html">צרו קשר</a></li>
+        </ul>
+        <div class="nav-cta">
+            <a class="btn btn-primary btn-sm" href="https://amir-dashboard-temp.vercel.app/nt" target="_blank" rel="noopener">כניסת מלווים</a>
+        </div>
+        <button class="mobile-toggle" aria-label="תפריט"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<header class="hero-dark page-hero">
+    <div class="container">
+        <span class="badge"><span class="dot"></span> מהקליניקה, מתעדכן כל הזמן</span>
+        <h1>המתכונים <span class="grad-text">של אמיר</span></h1>
+        <p class="lead">מתכונים פשוטים, בריאים ועשירים בחלבון - עם ערכים תזונתיים מדויקים לכל מנה.</p>
+    </div>
+</header>
+
+<section class="section">
+    <div class="container">
+        <div class="rc-cats" id="rc-cats"></div>
+        <div class="rc-grid" id="rc-grid"><p style="grid-column:1/-1;text-align:center;color:var(--muted)">טוען מתכונים...</p></div>
+    </div>
+</section>
+
+<div class="rc-modal" id="rc-modal" role="dialog" aria-modal="true">
+    <div class="rc-box" id="rc-box"></div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>אמיר רובין</h4>
+                <p class="brand-line">דיאטן קליני וספורט, מרצה בתואר ראשון במדעי התזונה, דוקטורנט וחוקר קליני. ליווי תזונתי מבוסס מדע - מותאם לחיים האמיתיים.</p>
+            </div>
+            <div>
+                <h4>ניווט</h4>
+                <ul>
+                    <li><a href="index.html">בית</a></li>
+                    <li><a href="nutrition.html">ליווי תזונתי אישי</a></li>
+                    <li><a href="glp1.html">ליווי למטופלי GLP-1</a></li>
+                    <li><a href="lectures.html">הרצאות וסדנאות</a></li>
+                    <li><a href="blog/">בלוג</a></li>
+                    <li><a href="recipes.html">מתכונים</a></li>
+                    <li><a href="calculators.html">מחשבונים</a></li>
+                    <li><a href="glossary.html">מילון מונחים</a></li>
+                    <li><a href="faq.html">שאלות נפוצות</a></li>
+                    <li><a href="contact.html">צרו קשר</a></li>
+                    <li><a href="accessibility.html">הצהרת נגישות</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>עוד</h4>
+                <ul>
+                    <li><a href="https://primestudy.co.il" target="_blank" rel="noopener">מחקר PRIME</a></li>
+                    <li><a href="https://www.wellnessproject.co.il/landingpage" target="_blank" rel="noopener">פרויקט גזרה</a></li>
+                    <li><a href="https://www.instagram.com/amir_rubin_/" target="_blank" rel="noopener">אינסטגרם</a></li>
+                    <li><a data-wa="היי אמיר, אשמח לשמוע פרטים">וואטסאפ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">© <span id="year"></span> אמיר רובין · amirsportdiet.com · <a href="privacy.html" style="color:inherit">מדיניות פרטיות</a></div>
+    </div>
+</footer>
+
+<script src="js/site.js"></script>
+<script>
+(async () => {
+    const API = 'https://us-central1-wellnessprojectar.cloudfunctions.net/siteApi?recipes=1';
+    const CAT_HE = { breakfast: 'ארוחת בוקר', lunch: 'צהריים', dinner: 'ערב', snack: 'ביניים וחטיפים',
+        dessert: 'קינוחים', salad: 'סלטים', soup: 'מרקים', side: 'תוספות', drink: 'שתייה' };
+    const grid = document.getElementById('rc-grid');
+    const catsEl = document.getElementById('rc-cats');
+    let recipes = [], activeCat = 'הכל';
+    try {
+        const r = await fetch(API);
+        recipes = (await r.json()).recipes || [];
+    } catch {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center">שגיאה בטעינה - נסו לרענן</p>';
+        return;
+    }
+    const macros = (n) => {
+        if (!n) return '';
+        const parts = [];
+        if (n.calories) parts.push(`🔥 ${n.calories} קק"ל`);
+        if (n.protein) parts.push(`חלבון ${n.protein}`);
+        if (n.carbs) parts.push(`פחמימה ${n.carbs}`);
+        if (n.fat) parts.push(`שומן ${n.fat}`);
+        return parts.map((p) => `<span>${p}</span>`).join('');
+    };
+    const cats = ['הכל', ...new Set(recipes.flatMap((r) => r.categories || []).map((c) => CAT_HE[c] || c))];
+    catsEl.innerHTML = cats.map((c) => `<button class="cat-chip${c === 'הכל' ? ' on' : ''}" data-c="${c}">${c}</button>`).join('');
+    catsEl.addEventListener('click', (e) => {
+        const b = e.target.closest('.cat-chip');
+        if (!b) return;
+        activeCat = b.dataset.c;
+        catsEl.querySelectorAll('.cat-chip').forEach((x) => x.classList.toggle('on', x === b));
+        paint();
+    });
+    const paint = () => {
+        const list = recipes.filter((r) => activeCat === 'הכל' ||
+            (r.categories || []).some((c) => (CAT_HE[c] || c) === activeCat));
+        grid.innerHTML = list.map((r, i) => `
+            <div class="recipe-card" data-i="${recipes.indexOf(r)}">
+                <div class="im">${r.imageUrl ? `<img src="${r.imageUrl}" alt="" loading="lazy">` : ''}</div>
+                <div class="bd">
+                    <h3>${r.title}</h3>
+                    <p>${r.description || ''}</p>
+                    <div class="macros">${macros(r.nutrition)}</div>
+                </div>
+            </div>`).join('') || '<p style="grid-column:1/-1;text-align:center;color:var(--muted)">אין מתכונים בקטגוריה</p>';
+    };
+    paint();
+    const modal = document.getElementById('rc-modal'), box = document.getElementById('rc-box');
+    grid.addEventListener('click', (e) => {
+        const card = e.target.closest('.recipe-card');
+        if (!card) return;
+        const r = recipes[Number(card.dataset.i)];
+        box.innerHTML = `
+            <button class="x" aria-label="סגירה">✕</button>
+            <h2>${r.title}</h2>
+            <p style="color:var(--muted);font-size:14px">${r.description || ''}</p>
+            ${r.imageUrl ? `<img src="${r.imageUrl}" alt="">` : ''}
+            <div class="macros">${macros(r.nutrition)}</div>
+            ${(r.ingredients || []).length ? `<h4>🛒 מצרכים</h4><ul>${r.ingredients.map((x) => `<li>${x}</li>`).join('')}</ul>` : ''}
+            ${(r.instructions || []).length ? `<h4>👨‍🍳 הכנה</h4><ol>${r.instructions.map((x) => `<li>${x}</li>`).join('')}</ol>` : ''}`;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+    const close = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+    modal.addEventListener('click', (e) => { if (e.target === modal || e.target.closest('.x')) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+})();
+</script>
+</body>
+</html>
