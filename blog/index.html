@@ -61,11 +61,45 @@
 <!-- ===== POSTS ===== -->
 <section class="section">
     <div class="container">
+        <div class="blog-toolbar reveal">
+            <input type="search" id="blog-search" placeholder="🔍 חיפוש מאמר... (למשל: חלבון, קפה, שינה)" aria-label="חיפוש בבלוג">
+            <div class="blog-cats" id="blog-cats"></div>
+            <div class="blog-count" id="blog-count"></div>
+        </div>
         <div class="grid grid-3" id="posts-grid"></div>
         <script src="posts.js"></script>
         <script>
         /* render post cards from POSTS (defined in posts.js) */
-        document.querySelector('#posts-grid').innerHTML = POSTS.map((p) => {
+        const CAT_ORDER = ['הכל', 'תזונה', 'תוספים', 'דיאטות', 'אימון', 'מיתוסים', 'ירידה במשקל', 'בריאות', 'טיפים'];
+        const usedCats = ['הכל', ...CAT_ORDER.slice(1).filter((c) => POSTS.some((p) => p.cat === c))];
+        let activeCat = 'הכל', query = '';
+        const catsEl = document.querySelector('#blog-cats');
+        catsEl.innerHTML = usedCats.map((c) =>
+            `<button class="cat-chip${c === 'הכל' ? ' on' : ''}" data-cat="${c}">${c}</button>`).join('');
+        catsEl.addEventListener('click', (e) => {
+            const b = e.target.closest('.cat-chip');
+            if (!b) return;
+            activeCat = b.dataset.cat;
+            catsEl.querySelectorAll('.cat-chip').forEach((x) => x.classList.toggle('on', x === b));
+            render();
+        });
+        document.querySelector('#blog-search').addEventListener('input', (e) => {
+            query = e.target.value.trim();
+            render();
+        });
+        const render = () => {
+        const list = POSTS.filter((p) => {
+            if (p.comingSoon) return activeCat === 'הכל' && !query;
+            if (activeCat !== 'הכל' && p.cat !== activeCat) return false;
+            if (query) {
+                const hay = (p.title + ' ' + (p.description || '') + ' ' + (p.tag || '') + ' ' + (p.cat || '')).toLowerCase();
+                return query.toLowerCase().split(/\s+/).every((w) => hay.includes(w));
+            }
+            return true;
+        });
+        const shown = list.filter((p) => !p.comingSoon).length;
+        document.querySelector('#blog-count').textContent = shown ? shown + ' מאמרים' : 'לא נמצאו מאמרים - נסו מילה אחרת';
+        document.querySelector('#posts-grid').innerHTML = list.map((p) => {
             const fmtDate = p.date ? p.date.split('-').reverse().join('.') : '';
             if (p.comingSoon) {
                 return `<div class="card post-card" style="opacity:0.65">
@@ -87,6 +121,8 @@
                 </div>
             </a>`;
         }).join('');
+        };
+        render();
         </script>
     </div>
 </section>

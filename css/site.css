@@ -594,3 +594,18 @@ html.a11y-motion .reveal { opacity: 1 !important; transform: none !important; }
 
 a.way { text-decoration: none; color: inherit; cursor: pointer; transition: transform .15s, box-shadow .15s; }
 a.way:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(6,32,25,0.1); }
+
+/* ===== blog search + categories ===== */
+.blog-toolbar { max-width: 860px; margin: 0 auto 26px; }
+#blog-search {
+    width: 100%; padding: 13px 16px; border: 1.5px solid rgba(0,0,0,0.14);
+    border-radius: 12px; font: inherit; font-size: 15px; background: #fff; margin-bottom: 12px;
+}
+#blog-search:focus { outline: 2px solid #14805e; border-color: transparent; }
+.blog-cats { display: flex; flex-wrap: wrap; gap: 8px; }
+.cat-chip {
+    border: 1.5px solid rgba(0,0,0,0.12); background: #fff; border-radius: 999px;
+    padding: 7px 16px; font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+}
+.cat-chip.on { background: #0e5c44; color: #fff; border-color: #0e5c44; }
+.blog-count { font-size: 13px; color: var(--muted); margin-top: 10px; }
