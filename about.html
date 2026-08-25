@@ -162,6 +162,52 @@
     </div>
 </section>
 
+<!-- ===== התעודות ===== -->
+<section class="section certs-gallery">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="kicker">שחור על גבי לבן</span>
+            <h2>התעודות</h2>
+            <p>תואר ראשון במדעי התזונה, רישיון ממשלתי והסמכות האימון - והתואר השני כבר הושלם, בדרך לדוקטורט.</p>
+        </div>
+        <div class="grid grid-2 certs-grid">
+            <figure class="card cert-card reveal">
+                <img src="images/certs/bsc-nutrition.jpg" alt="תעודת בוגר אוניברסיטה במדעי התזונה - האוניברסיטה העברית בירושלים" loading="lazy">
+                <figcaption><b>B.Sc. במדעי התזונה</b><span>האוניברסיטה העברית בירושלים</span></figcaption>
+            </figure>
+            <figure class="card cert-card reveal d1">
+                <img src="images/certs/dietitian-license.jpg" alt="תעודת תזונאי-דיאטן - משרד הבריאות" loading="lazy">
+                <figcaption><b>תעודת תזונאי-דיאטן</b><span>משרד הבריאות, מדינת ישראל</span></figcaption>
+            </figure>
+            <figure class="card cert-card reveal">
+                <img src="images/certs/personal-trainer.jpg" alt="תעודת מדריך כושר אישי - מכון וינגייט" loading="lazy">
+                <figcaption><b>מדריך כושר אישי</b><span>המכללה לחינוך גופני ולספורט ע"ש זינמן במכון וינגייט</span></figcaption>
+            </figure>
+            <figure class="card cert-card reveal d1">
+                <img src="images/certs/wingate-instructor.jpg" alt="תעודת מדריך כושר גופני ובריאות ומדריך אימון קטינים - מכון וינגייט" loading="lazy">
+                <figcaption><b>מדריך כושר גופני ובריאות + אימון קטינים</b><span>המכללה לחינוך גופני ולספורט ע"ש זינמן במכון וינגייט</span></figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<div class="cert-lightbox" id="cert-lb" role="dialog" aria-modal="true"><img src="" alt="תעודה בתצוגה מלאה"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const lb = document.getElementById('cert-lb');
+    document.querySelectorAll('.cert-card img').forEach((im) => {
+        im.addEventListener('click', () => {
+            lb.querySelector('img').src = im.src;
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+    lb.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+});
+</script>
+
 <!-- ===== הערכים ===== -->
 <section class="section">
     <div class="container">
